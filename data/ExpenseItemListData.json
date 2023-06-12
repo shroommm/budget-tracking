@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "category": "Grocery shopping",
+      "date": "22 July 2021",
+      "cost": 30000
+    },
+    {
+      "category": "Gym",
+      "date": "23 July 2021",
+      "cost": 15000
+    },
+    {
+      "category": "Coffee",
+      "date": "24 July 2021",
+      "cost": 9000
+    },
+    {
+      "category": "Bar",
+      "date": "24 July 2021",
+      "cost": 29000
+    }
+  ]
+}
