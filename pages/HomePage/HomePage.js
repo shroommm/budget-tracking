@@ -11,8 +11,12 @@ import {
   StatusBar,
 } from "react-native";
 
+import { Stack } from "expo-router";
+
 import ExpenseItem from "../../components/ExpenseItem/ExpenseItem";
 import expenseItemListData from "../../data/ExpenseItemListData";
+
+import { BottomMenu } from "../../components"
 
 const HomePage = ({ navigation }) => {
   let [isExpenseView, setIsExpenseView] = useState(true);
@@ -105,6 +109,7 @@ const HomePage = ({ navigation }) => {
         title="Go to Jane's profile"
         onPress={() => navigation.navigate("Profile", { name: "Jane" })}
       /> */}
+      <BottomMenu />
     </SafeAreaView>
   );
 };
