@@ -29,6 +29,12 @@
       "date": "25 July 2021",
       "cost": 50000,
       "type":"income"
+    },
+    {
+      "category": "Coin",
+      "date": "20 July 2021",
+      "cost": 25000,
+      "type":"income"
     }
   ]
 }

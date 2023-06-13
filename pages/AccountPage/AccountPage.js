@@ -9,7 +9,7 @@ import {
   TouchableHighlight,
 } from "react-native";
 
-const MenuPage = ({ navigation }) => {
+const AccountPage = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
       <View style={styles.container}>
@@ -33,7 +33,7 @@ const MenuPage = ({ navigation }) => {
   );
 };
 
-export default MenuPage;
+export default AccountPage;
 
 const styles = StyleSheet.create({
   container: {
