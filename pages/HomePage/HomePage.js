@@ -19,7 +19,6 @@ const HomePage = ({ navigation }) => {
   let expenses = expenseItemListData.data.filter(
     (item) => item.type === "expense"
   );
-
   let incomes = expenseItemListData.data.filter(
     (item) => item.type === "income"
   );
