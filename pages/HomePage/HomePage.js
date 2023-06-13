@@ -109,7 +109,10 @@ const HomePage = ({ navigation }) => {
         title="Go to Jane's profile"
         onPress={() => navigation.navigate("Profile", { name: "Jane" })}
       /> */}
-      <BottomMenu />
+
+      {/*------ Add events for the 2 buttons: Menu & Add-item ------*/}
+      <BottomMenu menuOnPress={null} addItemOnPress={null}/> 
+      
     </SafeAreaView>
   );
 };
