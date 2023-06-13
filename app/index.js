@@ -15,7 +15,6 @@ const HomeScreen = ({ navigation }) => {
   );
 };
 
-
 const Home = () => {
   return (
     <NavigationContainer
@@ -27,10 +26,10 @@ const Home = () => {
           name="Home"
           component={HomePage}
           options={{
-            title: "",
+        
             headerShadowVisible: false,
             headerShown: false,
-            headerTitle:""
+            headerTitle:"",
           }}
         />
       </Stack.Navigator>

@@ -3,22 +3,32 @@
     {
       "category": "Grocery shopping",
       "date": "22 July 2021",
-      "cost": 30000
+      "cost": 30000,
+      "type":"expense"
     },
     {
       "category": "Gym",
       "date": "23 July 2021",
-      "cost": 15000
+      "cost": 15000,
+      "type":"expense"
     },
     {
       "category": "Coffee",
       "date": "24 July 2021",
-      "cost": 9000
+      "cost": 9000,
+      "type":"expense"
     },
     {
       "category": "Bar",
       "date": "24 July 2021",
-      "cost": 29000
+      "cost": 29000,
+      "type":"expense"
+    },
+    {
+      "category": "Salary",
+      "date": "25 July 2021",
+      "cost": 50000,
+      "type":"income"
     }
   ]
 }
