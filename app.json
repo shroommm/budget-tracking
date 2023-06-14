@@ -5,6 +5,8 @@
       "bundler": "metro"
     },
     "name": "Budget-Tracking",
-    "slug": "Budget-Tracking"
+    "slug": "Budget-Tracking",
+    "userInterfaceStyle": "automatic"
+
   }
 }

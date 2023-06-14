@@ -60,8 +60,8 @@ const HomePage = ({ navigation }) => {
           }}
         >
           {(isExpenseView
-            ? expensesSum.toLocaleString()
-            : incomesSum.toLocaleString()) + " VND"}
+            ? "-"+expensesSum.toLocaleString()
+            : "+"+incomesSum.toLocaleString()) + " VND"}
         </Text>
         <View style={{ flexDirection: "row", justifyContent: "center" }}>
           <TouchableOpacity
@@ -135,9 +135,12 @@ const styles = StyleSheet.create({
   },
   group$79: {
     flexDirection: "column",
+    paddingVertical:10,
+
   },
   group$80: {
     flexDirection: "column",
+    paddingVertical:10
   },
   group$76: {
     flexDirection: "column",
