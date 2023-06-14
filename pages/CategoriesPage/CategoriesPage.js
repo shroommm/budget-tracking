@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   TouchableHighlight,
 } from "react-native";
+import { BottomMenu } from "../../components";
 
 const CategoriesPage = ({ navigation }) => {
   return (
@@ -15,6 +16,13 @@ const CategoriesPage = ({ navigation }) => {
       <View style={styles.container}>
         <Text>CategoriesPage</Text>
       </View>
+
+      <BottomMenu
+        menuOnPress={() => {
+          navigation.navigate("Menu");
+        }}
+        addItemOnPress={null}
+      />
     </SafeAreaView>
   );
 };

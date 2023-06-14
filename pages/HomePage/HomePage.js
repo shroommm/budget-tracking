@@ -16,7 +16,7 @@ import { Stack } from "expo-router";
 import ExpenseItem from "../../components/ExpenseItem/ExpenseItem";
 import expenseItemListData from "../../data/ExpenseItemListData";
 
-import { BottomMenu } from "../../components"
+import { BottomMenu } from "../../components";
 
 const HomePage = ({ navigation }) => {
   let [isExpenseView, setIsExpenseView] = useState(true);
@@ -64,8 +64,8 @@ const HomePage = ({ navigation }) => {
           }}
         >
           {(isExpenseView
-            ? "-"+expensesSum.toLocaleString()
-            : "+"+incomesSum.toLocaleString()) + " VND"}
+            ? "-" + expensesSum.toLocaleString()
+            : "+" + incomesSum.toLocaleString()) + " VND"}
         </Text>
         <View style={{ flexDirection: "row", justifyContent: "center" }}>
           <TouchableOpacity
@@ -111,8 +111,16 @@ const HomePage = ({ navigation }) => {
       /> */}
 
       {/*------ Add events for the 2 buttons: Menu & Add-item ------*/}
-      <BottomMenu menuOnPress={null} addItemOnPress={null}/> 
-      
+
+      <BottomMenu
+        menuOnPress={() => {
+          navigation.navigate("Menu");
+        }}
+        addItemOnPress={() => {
+          navigation.navigate("AddMoney")
+        }}
+
+      />
     </SafeAreaView>
   );
 };
@@ -143,12 +151,11 @@ const styles = StyleSheet.create({
   },
   group$79: {
     flexDirection: "column",
-    paddingVertical:10,
-
+    paddingVertical: 10,
   },
   group$80: {
     flexDirection: "column",
-    paddingVertical:10
+    paddingVertical: 10,
   },
   group$76: {
     flexDirection: "column",

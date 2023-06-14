@@ -8,27 +8,20 @@ import {
   TouchableOpacity,
   TouchableHighlight,
 } from "react-native";
+import { BottomMenu } from "../../components";
 
 const AccountPage = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
       <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.textWrapper}
-          onPress={() => navigation.navigate("Home")}
-        >
-          <Text style={styles.text}>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.textWrapper}>
-          <Text style={styles.text}>Categories</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.textWrapper}>
-          <Text style={styles.text}>Accounts</Text>
-        </TouchableOpacity>
-        {/* <TouchableOpacity style={{...styles.textWrapper, marginTop:'auto'}}>
-            <Text style={styles.text}>Log Out</Text>
-          </TouchableOpacity> */}
+        <Text>Account Page</Text>
       </View>
+      <BottomMenu
+        menuOnPress={() => {
+          navigation.navigate("Menu");
+        }}
+        addItemOnPress={null}
+      />
     </SafeAreaView>
   );
 };
