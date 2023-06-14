@@ -20,7 +20,9 @@ const HomeScreen = ({ navigation }) => {
   );
 };
 
-
+const setOption = {
+  headerShown:false
+}
 const Home = () => {
   return (
     <NavigationContainer
@@ -31,9 +33,9 @@ const Home = () => {
         <Stack.Screen name="Home" component={HomePage} options={setOption} />
         <Stack.Screen name="Menu" component={MenuPage} options={setOption} />
         <Stack.Screen name="AddMoney" component={AddMoneyPage} options={setOption} />
-        {/* <Stack.Screen name="Categories" component={CategoriesPage} options={setOption} />
+        <Stack.Screen name="Categories" component={CategoriesPage} options={setOption} />
         <Stack.Screen name="Account" component={AccountPage} options={setOption} />
-        <Stack.Screen name="AddPaymentMethod" component={AddPaymentMethodPage} options={setOption} /> */}
+        <Stack.Screen name="AddPaymentMethod" component={AddPaymentMethodPage} options={setOption} />
       </Stack.Navigator>
     </NavigationContainer>
   );

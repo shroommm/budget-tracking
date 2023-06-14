@@ -14,7 +14,7 @@ const BottomMenu = ({ menuOnPress, addItemOnPress }) => {
         <MenuBtn iconUrl={menu_icon} dimension='90%' handlePress={menuOnPress} />
       </View>
       <View style={{flex: 1, alignItems: 'center', paddingBottom: 0}}>
-        <MenuBtn iconUrl={add_icon} dimension='90%' handlePress={addItemOnPress} />
+        <MenuBtn iconUrl={add_icon} dimension='90%' handlePress={(addItemOnPress)} />
       </View>
     </View>
   );

@@ -8,13 +8,19 @@ import {
   TouchableOpacity,
   TouchableHighlight,
 } from "react-native";
-
+ 
 const AddPaymentMethodPage = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
       <View style={styles.container}>
         <Text>AddPaymentMethodPage</Text>
       </View>
+      <BottomMenu
+        menuOnPress={() => {
+          navigation.navigate("Menu");
+        }}
+        addItemOnPress={null}
+      />
     </SafeAreaView>
   );
 };

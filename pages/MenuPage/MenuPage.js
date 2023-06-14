@@ -19,10 +19,16 @@ const MenuPage = ({ navigation }) => {
         >
           <Text style={styles.text}>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.textWrapper}>
+        <TouchableOpacity
+          style={styles.textWrapper}
+          onPress={() => navigation.navigate("Categories")}
+        >
           <Text style={styles.text}>Categories</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.textWrapper}>
+        <TouchableOpacity
+          style={styles.textWrapper}
+          onPress={() => navigation.navigate("Account")}
+        >
           <Text style={styles.text}>Accounts</Text>
         </TouchableOpacity>
         {/* <TouchableOpacity style={{...styles.textWrapper, marginTop:'auto'}}>
