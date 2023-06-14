@@ -19,11 +19,8 @@ const HomeScreen = ({ navigation }) => {
     />
   );
 };
-const setOption = {
-  headerShadowVisible: false,
-  headerShown: false,
-  headerTitle: "",
-};
+
+
 const Home = () => {
   return (
     <NavigationContainer
