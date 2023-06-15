@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   TouchableHighlight,
 } from "react-native";
-import { BottomMenu } from "../../components";
+import { BottomMenu, AccountTotal, AccountDetail } from "../../components";
 
 const AccountPage = ({ navigation }) => {
   return (
@@ -16,6 +16,11 @@ const AccountPage = ({ navigation }) => {
       <View style={styles.container}>
         <Text>Account Page</Text>
       </View>
+
+      <AccountTotal/>
+
+      <AccountDetail/>
+
       <BottomMenu
         menuOnPress={() => {
           navigation.navigate("Menu");
@@ -30,10 +35,8 @@ export default AccountPage;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: "center",
-    gap: 15,
-    paddingVertical: 30,
+    paddingTop: 30,
   },
   textWrapper: {
     backgroundColor: "#94C3F6",
