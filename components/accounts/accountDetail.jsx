@@ -14,7 +14,7 @@ const AccountDetail = () => {
                 renderItem={({ item }) => (
                     <Account />
                 )}
-                showsVerticalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}    
             />
         </View>
     )

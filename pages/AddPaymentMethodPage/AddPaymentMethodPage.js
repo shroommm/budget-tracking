@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import {
   View,
@@ -8,18 +8,29 @@ import {
   TouchableOpacity,
   TouchableHighlight,
 } from "react-native";
- 
+
+import { MenuBtn, InputAccount } from "../../components";
+
+import left_icon from "../../asset/icons/left.png"
+
 const AddPaymentMethodPage = ({ navigation }) => {
+
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
+
       <View style={styles.container}>
-        <Text>AddPaymentMethodPage</Text>
+        <MenuBtn
+          iconUrl={left_icon}
+          dimension={'70%'}
+          handlePress={() => { navigation.navigate("Account") }}
+          style={styles.returnBtn}
+        />
+        <Text style={styles.title}>Add money source</Text>
       </View>
-      <BottomMenu
-        menuOnPress={() => {
-          navigation.navigate("Menu");
-        }}
-        addItemOnPress={null}
+
+      <InputAccount
+        style={styles.input}
+        addBtnOnPress={() => { navigation.navigate("Account") }}
       />
     </SafeAreaView>
   );
@@ -29,20 +40,22 @@ export default AddPaymentMethodPage;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center",
-    gap: 15,
-    paddingVertical: 30,
+    alignItems: "flex-start",
+    paddingTop: 30,
+    paddingBottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
-  textWrapper: {
-    backgroundColor: "#94C3F6",
-    width: "85%",
-    borderRadius: 7,
-    paddingVertical: 10,
+  title: {
   },
-  text: {
-    fontSize: 20,
-    textAlign: "center",
-    color: "#535151",
+  returnBtn: {
+    position: 'absolute',
+    height: 40,
+    width: 40,
+    top: 22,
+    left: '4%',
+  },
+  input: {
+    marginTop: 20,
   },
 });

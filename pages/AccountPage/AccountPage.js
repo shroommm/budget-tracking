@@ -25,7 +25,9 @@ const AccountPage = ({ navigation }) => {
         menuOnPress={() => {
           navigation.navigate("Menu");
         }}
-        addItemOnPress={null}
+        addItemOnPress={() => {
+          navigation.navigate("AddPaymentMethod")
+        }}
       />
     </SafeAreaView>
   );
