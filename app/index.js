@@ -2,13 +2,17 @@ import { Button } from "react-native";
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+
 import HomePage from "../pages/HomePage/HomePage";
 import MenuPage from "../pages/MenuPage/MenuPage";
 import AddMoneyPage from "../pages/AddMoneyPage/AddMoneyPage";
 import CategoriesPage from "../pages/CategoriesPage/CategoriesPage";
 import AddPaymentMethodPage from "../pages/AddPaymentMethodPage/AddPaymentMethodPage";
 import AccountPage from "../pages/AccountPage/AccountPage";
-import TransferHistoryPage from "../pages/TransferHistoryPage/TransferHistoryPage"
+import TransferHistoryPage from "../pages/TransferHistoryPage/TransferHistoryPage";
+import AddTransferPage from "../pages/AddTransferPage/AddTransferPage"
+
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +42,7 @@ const Home = () => {
         <Stack.Screen name="Account" component={AccountPage} options={setOption} />
         <Stack.Screen name="AddPaymentMethod" component={AddPaymentMethodPage} options={setOption} />
         <Stack.Screen name="TransferHistory" component={TransferHistoryPage} options={setOption} />
+        <Stack.Screen name="AddTransfer" component={AddTransferPage} options={setOption} />
       </Stack.Navigator>
     </NavigationContainer>
   );

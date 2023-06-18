@@ -19,6 +19,7 @@ const AccountPage = ({ navigation }) => {
 
       <AccountTotal
         historyOnPress={() => { navigation.navigate("TransferHistory"); }}
+        newTransferOnPress={() => { navigation.navigate("AddTransfer"); }}
       />
 
       <AccountDetail/>
