@@ -8,6 +8,7 @@ import AddMoneyPage from "../pages/AddMoneyPage/AddMoneyPage";
 import CategoriesPage from "../pages/CategoriesPage/CategoriesPage";
 import AddPaymentMethodPage from "../pages/AddPaymentMethodPage/AddPaymentMethodPage";
 import AccountPage from "../pages/AccountPage/AccountPage";
+import TransferHistoryPage from "../pages/TransferHistoryPage/TransferHistoryPage"
 
 const Stack = createNativeStackNavigator();
 
@@ -21,7 +22,7 @@ const HomeScreen = ({ navigation }) => {
 };
 
 const setOption = {
-  headerShown:false
+  headerShown: false
 }
 const Home = () => {
   return (
@@ -36,6 +37,7 @@ const Home = () => {
         <Stack.Screen name="Categories" component={CategoriesPage} options={setOption} />
         <Stack.Screen name="Account" component={AccountPage} options={setOption} />
         <Stack.Screen name="AddPaymentMethod" component={AddPaymentMethodPage} options={setOption} />
+        <Stack.Screen name="TransferHistory" component={TransferHistoryPage} options={setOption} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -9,11 +9,11 @@ import {
   TouchableHighlight,
 } from "react-native";
 
-import { MenuBtn, InputAccount } from "../../components";
+import { MenuBtn, TransferHistory } from "../../components";
 
 import left_icon from "../../asset/icons/left.png"
 
-const AddPaymentMethodPage = ({ navigation }) => {
+const TransferHistoryPage = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
@@ -25,18 +25,15 @@ const AddPaymentMethodPage = ({ navigation }) => {
           handlePress={() => { navigation.navigate("Account") }}
           style={styles.returnBtn}
         />
-        <Text style={styles.title}>Add money source</Text>
+        <Text style={styles.title}>Transfer history</Text>
       </View>
 
-      <InputAccount
-        style={styles.input}
-        addBtnOnPress={() => { navigation.navigate("Account") }}
-      />
+      <TransferHistory/>
     </SafeAreaView>
   );
 };
 
-export default AddPaymentMethodPage;
+export default TransferHistoryPage;
 
 const styles = StyleSheet.create({
   container: {
