@@ -7,7 +7,7 @@ import styles from './accountTotal.style'
 import history_icon from '../../asset/icons/history.png' //author: Tempo_doloe (flaticon)
 import transfer_icon from '../../asset/icons/transfer.png' //author: Uniconlabs (flaticon)
 
-const AccountTotal = () => {
+const AccountTotal = ( {historyOnPress, newTransferOnPress} ) => {
     return (
         <View style={styles.container}>
             <View style={styles.totalContainer}>
@@ -16,11 +16,11 @@ const AccountTotal = () => {
             </View>
             <View style={styles.optionsContainer}>
                 <View style={styles.btnContainer}>
-                    <AccountBtn iconUrl={history_icon} dimension='90%' handlePress={null}/>
+                    <AccountBtn iconUrl={history_icon} dimension='90%' handlePress={historyOnPress}/>
                     <Text style={styles.btnContext}>Transfer history</Text>
                 </View>
                 <View style={styles.btnContainer}>
-                    <AccountBtn iconUrl={transfer_icon} dimension='90%' handlePress={null}/>
+                    <AccountBtn iconUrl={transfer_icon} dimension='90%' handlePress={newTransferOnPress}/>
                     <Text style={styles.btnContext}>New transfer</Text>
                 </View>
             </View>

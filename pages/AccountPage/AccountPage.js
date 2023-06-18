@@ -17,7 +17,9 @@ const AccountPage = ({ navigation }) => {
         <Text>Account Page</Text>
       </View>
 
-      <AccountTotal/>
+      <AccountTotal
+        historyOnPress={() => { navigation.navigate("TransferHistory"); }}
+      />
 
       <AccountDetail/>
 
