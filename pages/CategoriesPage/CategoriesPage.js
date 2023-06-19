@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { SearchBar } from "@rneui/themed";
 import {
   View,
   Text,
@@ -7,15 +7,99 @@ import {
   StyleSheet,
   TouchableOpacity,
   TouchableHighlight,
+  FlatList,
+  Modal,
+  Pressable,
 } from "react-native";
 import { BottomMenu } from "../../components";
+import { getCategories } from "../../utils/DataHandler";
+import { Input } from "@rneui/base";
 
 const CategoriesPage = ({ navigation }) => {
+  const [search, setSearch] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
+  let categories = getCategories();
+  const updateSearch = (search) => {
+    //Handle search categories
+
+    setSearch(search);
+  };
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
       <View style={styles.container}>
-        <Text>CategoriesPage</Text>
+        <Text>Categories</Text>
+        <View style={[styles.view, { width: "100%" }]}>
+          <SearchBar
+            placeholder="Type Here..."
+            onChangeText={updateSearch}
+            value={search}
+          />
+        </View>
+        <Text>Click to edit</Text>
+        <View style={{ flex: 1 }}>
+          <FlatList
+            data={categories}
+            renderItem={({ item, index }) => (
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "red",
+                  width: "50%",
+                  height: 100,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: 5,
+                }}
+                onPress={() => setModalVisible(true)}
+              >
+                <Text style={{ fontSize: 30 }}>Salary</Text>
+              </TouchableOpacity>
+            )}
+            contentContainerStyle={{ paddingHorizontal: 20 }}
+            keyExtractor={(item) => item.id}
+            numColumns={2}
+          />
+        </View>
       </View>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <View style={{ width: "100%" }}>
+              <Input
+                placeholder="Category name"
+                containerStyle={{ width: "100%" }}
+                inputStyle={{ width: "100%" }}
+              />
+            </View>
+            <View style={{ flexDirection: "row", gap: 10 }}>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                <Text style={styles.borderButton}>Close</Text>
+              </Pressable>
+
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => {
+                  //handle store data
+                  setModalVisible(!modalVisible)
+                }}
+              >
+                <Text style={styles.borderButton}>Add</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
 
       <BottomMenu
         menuOnPress={() => {
@@ -35,6 +119,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 15,
     paddingVertical: 30,
+    width: "95%",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   textWrapper: {
     backgroundColor: "#94C3F6",
@@ -46,5 +133,37 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     color: "#535151",
+  },
+  view: {
+    margin: 10,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    width: "100%",
+
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  borderButton: {
+    borderWidth: 1, // Border width in pixels
+    borderColor: "black", // Border color
+    borderRadius: 5, // Border radius in pixels (optional)
+    padding: 10, // Padding around the component (optional)
   },
 });

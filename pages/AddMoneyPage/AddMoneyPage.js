@@ -14,10 +14,22 @@ import {
 import { Input } from "@rneui/themed";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { BottomMenu } from "../../components";
+
 const AddMoneyPage = ({ navigation }) => {
   const [inputValue, setInputValue] = useState("");
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+
+  const modalComponent = (props) => {
+    return (
+      <Pressable
+        style={[styles.button, styles.buttonOpen]}
+        onPress={() => setModalVisible(true)}
+      >
+        <Text style={styles.textStyle}>Show Modal</Text>
+      </Pressable>
+    );
+  };
 
   const handleInputChange = (text) => {
     // Remove any non-numeric characters from the input value
@@ -144,20 +156,59 @@ const AddMoneyPage = ({ navigation }) => {
                   style={[styles.button, styles.buttonClose]}
                   onPress={() => setModalVisible(!modalVisible)}
                 >
-                  <Text style={styles.textStyle}>Hide Modal</Text>
+                  <Text style={styles.textStyle}>Close</Text>
                 </Pressable>
               </View>
             </View>
           </Modal>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            width: "100%",
+            gap: 15,
+            marginBottom: 10,
+          }}
+        >
           <Pressable
             style={[styles.button, styles.buttonOpen]}
             onPress={() => setModalVisible(true)}
           >
-            <Text style={styles.textStyle}>Show Modal</Text>
+            <Text style={styles.textStyle}>Method</Text>
           </Pressable>
+          <Text>Cash</Text>
         </View>
-        <Input label={"Category name"} />
-        <Input label={"Category name"} />
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            width: "100%",
+            gap: 15,
+            marginBottom: 10,
+          }}
+        >
+          <Pressable
+            style={[styles.button, styles.buttonOpen]}
+            onPress={() => setModalVisible(true)}
+          >
+            <Text style={styles.textStyle}>Category</Text>
+          </Pressable>
+          <Text>Shopping</Text>
+        </View>
+
+        <TouchableOpacity
+          style={{
+            backgroundColor: "red",
+            paddingHorizontal: "10%",
+            paddingVertical: 10,
+            borderRadius:15
+          }}
+        >
+          <Text>Add</Text>
+        </TouchableOpacity>
       </View>
 
       <BottomMenu
@@ -201,8 +252,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
-    width:"100%",
-    height:"80%",
+    width: "100%",
+    height: "80%",
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -220,6 +271,7 @@ const styles = StyleSheet.create({
   },
   buttonOpen: {
     backgroundColor: "#F194FF",
+    width: "30%",
   },
   buttonClose: {
     backgroundColor: "#2196F3",

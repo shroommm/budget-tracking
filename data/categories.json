@@ -1,0 +1,20 @@
+{
+    "data": [
+        {
+            "id":"123",
+            "name":"Fitness",
+            "usefor":"expense"
+        },
+        {
+            "id":"124",
+            "name":"Salary",
+            "usefor":"income"
+        },
+        {
+            "id":"125",
+            "name":"Coffee",
+            "usefor":"expense"
+        }
+
+    ]
+}

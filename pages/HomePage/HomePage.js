@@ -17,15 +17,12 @@ import ExpenseItem from "../../components/ExpenseItem/ExpenseItem";
 import expenseItemListData from "../../data/ExpenseItemListData";
 
 import { BottomMenu } from "../../components";
+import { getExpenses, getIncomes } from "../../utils/DataHandler";
 
 const HomePage = ({ navigation }) => {
   let [isExpenseView, setIsExpenseView] = useState(true);
-  let expenses = expenseItemListData.data.filter(
-    (item) => item.type === "expense"
-  );
-  let incomes = expenseItemListData.data.filter(
-    (item) => item.type === "income"
-  );
+  let expenses = getExpenses();
+  let incomes = getIncomes();
   const expensesSum = expenses.reduce(
     (accumulator, item) => accumulator + item.cost,
     0
@@ -105,13 +102,6 @@ const HomePage = ({ navigation }) => {
           />
         </View>
       </View>
-      {/* <Button
-        title="Go to Jane's profile"
-        onPress={() => navigation.navigate("Profile", { name: "Jane" })}
-      /> */}
-
-      {/*------ Add events for the 2 buttons: Menu & Add-item ------*/}
-
       <BottomMenu
         menuOnPress={() => {
           navigation.navigate("Menu");
