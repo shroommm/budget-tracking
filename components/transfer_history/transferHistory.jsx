@@ -2,9 +2,10 @@ import { Text, FlatList, View } from "react-native";
 import { Transfer } from "../common/transfer/transfer"
 
 import styles from './transferHistory.style'
+import { getTransfers } from "../../utils/DataHandler";
 
 const TransferHistory = () => {
-    const data = [1, 2, 3, 4];
+    const data = getTransfers();
     const isLoading = false;
 
     return (
@@ -17,7 +18,7 @@ const TransferHistory = () => {
             <FlatList
                 data={data}
                 renderItem={({ item }) => (
-                    <Transfer />
+                    <Transfer item={item} />
                 )}
                 showsVerticalScrollIndicator={false}    
             />

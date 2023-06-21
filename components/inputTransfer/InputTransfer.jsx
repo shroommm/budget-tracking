@@ -3,18 +3,21 @@ import { useState, useRef, useCallback } from "react";
 import DropDownPicker from "react-native-dropdown-picker";
 
 import styles from "./InputTransfer.style";
-import { getAccounts } from "../../utils/DataHandler";
+import { addNewTransfer, getAccounts, processTransferMoney } from "../../utils/DataHandler";
 import { acc } from "react-native-reanimated";
 
 const InputTransfer = ({ style, addBtnOnPress }) => {
   const accounts = getAccounts();
   const accountItems = accounts.map((account) => {
     return {
-      id:account.id,
+      id: account.id,
       label: account.name,
       value: account.amount,
     };
   });
+  const [sender, setSender] = useState(null);
+  const [receiver, setReceiver] = useState(null);
+  //above của duy
   const [inputAmount, setInputAmount] = useState("");
 
   const [senderOpen, setSenderOpen] = useState(false);
@@ -33,6 +36,12 @@ const InputTransfer = ({ style, addBtnOnPress }) => {
     setSenderOpen(false);
   }, []);
 
+  const handleSelectSender = (item) => {
+    setSender(item);
+  };
+  const handleSelectReceiver = (item) => {
+    setReceiver(item);
+  };
   const handleAmountChange = (event) => {
     const value = event.nativeEvent.text;
 
@@ -51,15 +60,23 @@ const InputTransfer = ({ style, addBtnOnPress }) => {
     console.log(senderValue, amount, receiverValue);
 
     //{----- Check and Update new account (money source) here -----}
-    // let transfer = {
-    //     id: String(Math.floor(Date.now() / 100)),
-    //     name:inputName,
-    //     amount:Number(amount)
-    // }
 
-    //addBtnOnPress(); //This is for navigating back to Account Page
+    let dateFormat =new Date(Date.now());
+    let date =`${dateFormat.getDate()}/${dateFormat.getMonth()}/${dateFormat.getFullYear()}`;
+    let transfer = {
+      id: String(Math.floor(Date.now() / 100)),
+      sender: sender.label,
+      receiver: receiver.label,
+      senderId: sender.id,
+      receiverId: receiver.id,
+      amount: Number(amount),
+      date:date
+    };
+
+    addNewTransfer(transfer)
+    processTransferMoney(transfer);
+    addBtnOnPress(); //This is for navigating back to Account Page
   };
-
   return (
     <View style={[styles.container, style]}>
       <View style={styles.inputContainer}>
@@ -76,7 +93,7 @@ const InputTransfer = ({ style, addBtnOnPress }) => {
           placeholder="Select the sender"
           placeholderStyle={{ color: "grey" }}
           onOpen={onSenderOpen}
-          
+          onSelectItem={handleSelectSender}
         />
       </View>
       <View style={[styles.inputContainer, { zIndex: 1 }]}>
@@ -102,6 +119,7 @@ const InputTransfer = ({ style, addBtnOnPress }) => {
           placeholder="Select the receiver"
           placeholderStyle={{ color: "grey" }}
           onOpen={onReceiverOpen}
+          onSelectItem={handleSelectReceiver}
         />
       </View>
       <View style={styles.buttonContainer}>

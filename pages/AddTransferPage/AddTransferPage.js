@@ -11,18 +11,18 @@ import {
 
 import { MenuBtn, InputTransfer } from "../../components";
 
-import left_icon from "../../asset/icons/left.png"
+import left_icon from "../../asset/icons/left.png";
 
 const AddTransferPage = ({ navigation }) => {
-
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
-
       <View style={styles.container}>
         <MenuBtn
           iconUrl={left_icon}
-          dimension={'70%'}
-          handlePress={() => { navigation.navigate("Account") }}
+          dimension={"70%"}
+          handlePress={() => {
+            navigation.navigate("Account");
+          }}
           style={styles.returnBtn}
         />
         <Text style={styles.title}>Create new transfer</Text>
@@ -30,7 +30,9 @@ const AddTransferPage = ({ navigation }) => {
 
       <InputTransfer
         style={styles.input}
-        addBtnOnPress={() => { navigation.navigate("Account") }}
+        addBtnOnPress={() => {
+          navigation.navigate("Account", { shouldRender: true });
+        }}
       />
     </SafeAreaView>
   );
@@ -43,17 +45,16 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     paddingTop: 30,
     paddingBottom: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
   },
-  title: {
-  },
+  title: {},
   returnBtn: {
-    position: 'absolute',
+    position: "absolute",
     height: 40,
     width: 40,
     top: 22,
-    left: '4%',
+    left: "4%",
   },
   input: {
     marginTop: 20,
