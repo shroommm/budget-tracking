@@ -6,14 +6,13 @@ import {
   SafeAreaView,
   StyleSheet,
   TouchableOpacity,
-  TouchableHighlight,
 } from "react-native";
 
-import { MenuBtn, InputAccount } from "../../components";
+import { MenuBtn, InputCategory } from "../../components";
 
 import left_icon from "../../asset/icons/left.png";
 
-const AddPaymentMethodPage = ({ navigation }) => {
+const AddCategoryPage = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
       <View style={styles.container}>
@@ -21,24 +20,24 @@ const AddPaymentMethodPage = ({ navigation }) => {
           iconUrl={left_icon}
           dimension={"70%"}
           handlePress={() => {
-            navigation.navigate("Account");
+            navigation.goBack();
           }}
           style={styles.returnBtn}
         />
-        <Text style={styles.title}>Add money source</Text>
+        <Text style={styles.title}>Add new category</Text>
       </View>
 
-      <InputAccount
+      <InputCategory
         style={styles.input}
         addBtnOnPress={() => {
-          navigation.navigate("Account", { shouldRender: true });
+          navigation.navigate("Categories", { shouldRender: true });
         }}
       />
     </SafeAreaView>
   );
 };
 
-export default AddPaymentMethodPage;
+export default AddCategoryPage;
 
 const styles = StyleSheet.create({
   container: {

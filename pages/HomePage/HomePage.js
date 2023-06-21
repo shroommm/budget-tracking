@@ -11,18 +11,20 @@ import {
   StatusBar,
 } from "react-native";
 
-import { Stack } from "expo-router";
-
 import ExpenseItem from "../../components/ExpenseItem/ExpenseItem";
-import expenseItemListData from "../../data/ExpenseItemListData";
 
 import { BottomMenu } from "../../components";
-import { getExpenses, getIncomes } from "../../utils/DataHandler";
+import { getExpenses, getIncomes, initializeSampleDataSetSyncStorage } from "../../utils/DataHandler";
+
 
 const HomePage = ({ navigation }) => {
+
   let [isExpenseView, setIsExpenseView] = useState(true);
   let expenses = getExpenses();
   let incomes = getIncomes();
+  // let expenses = null;
+  // let incomes = null;
+
   const expensesSum = expenses.reduce(
     (accumulator, item) => accumulator + item.cost,
     0
@@ -107,9 +109,8 @@ const HomePage = ({ navigation }) => {
           navigation.navigate("Menu");
         }}
         addItemOnPress={() => {
-          navigation.navigate("AddMoney")
+          navigation.navigate("AddMoney");
         }}
-
       />
     </SafeAreaView>
   );

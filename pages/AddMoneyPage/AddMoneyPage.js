@@ -10,6 +10,7 @@ import {
   Button,
   Pressable,
   Modal,
+  FlatList,
 } from "react-native";
 import { Input } from "@rneui/themed";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -19,7 +20,7 @@ const AddMoneyPage = ({ navigation }) => {
   const [inputValue, setInputValue] = useState("");
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-
+  const [isExpense, setIsExpense] = useState(true);
   const modalComponent = (props) => {
     return (
       <Pressable
@@ -87,11 +88,14 @@ const AddMoneyPage = ({ navigation }) => {
             style={{
               flex: 1,
               width: "50%",
-              backgroundColor: "#F89999",
+              backgroundColor: isExpense ? "#F89999" : null,
               borderRadius: 15,
               paddingVertical: 8,
               borderWidth: 2, // Adjust the border width as desired
               borderColor: "#FE4848",
+            }}
+            onPress={() => {
+              setIsExpense(true)
             }}
           >
             <Text style={{ textAlign: "center", fontWeight: "bold" }}>
@@ -102,11 +106,14 @@ const AddMoneyPage = ({ navigation }) => {
             style={{
               flex: 1,
               width: "50%",
-              backgroundColor: "#A9F4A7",
+              backgroundColor: !isExpense ? "#A9F4A7" : null,
               borderRadius: 15,
               paddingVertical: 8,
               borderWidth: 2, // Adjust the border width as desired
               borderColor: "#009900",
+            }}
+            onPress={() => {
+              setIsExpense(false)
             }}
           >
             <Text style={{ textAlign: "center", fontWeight: "bold" }}>
@@ -151,7 +158,8 @@ const AddMoneyPage = ({ navigation }) => {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.modalText}>Hello World!</Text>
+                <Text style={styles.modalText}>Category</Text>
+                <FlatList/>
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
                   onPress={() => setModalVisible(!modalVisible)}
@@ -204,7 +212,7 @@ const AddMoneyPage = ({ navigation }) => {
             backgroundColor: "red",
             paddingHorizontal: "10%",
             paddingVertical: 10,
-            borderRadius:15
+            borderRadius: 15,
           }}
         >
           <Text>Add</Text>

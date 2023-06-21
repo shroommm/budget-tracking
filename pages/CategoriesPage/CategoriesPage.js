@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SearchBar } from "@rneui/themed";
 import {
   View,
@@ -14,16 +14,31 @@ import {
 import { BottomMenu } from "../../components";
 import { getCategories } from "../../utils/DataHandler";
 import { Input } from "@rneui/base";
+import { useCallback } from "react";
 
-const CategoriesPage = ({ navigation }) => {
+const CategoriesPage = ({ navigation, route }) => {
+  //Force render page start
+  const [refreshKey, setRefreshKey] = useState(0);
+  const forceRender = () => {
+    setRefreshKey(prevKey => prevKey + 1);
+  };
+
+  if(route.params?.shouldRender) {
+    forceRender();
+    route.params.shouldRender=false;
+  }
+  //Force render page end
+
   const [search, setSearch] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   let categories = getCategories();
+
   const updateSearch = (search) => {
     //Handle search categories
 
     setSearch(search);
   };
+
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
       <View style={styles.container}>
@@ -51,7 +66,7 @@ const CategoriesPage = ({ navigation }) => {
                 }}
                 onPress={() => setModalVisible(true)}
               >
-                <Text style={{ fontSize: 30 }}>Salary</Text>
+                <Text style={{ fontSize: 30 }}>{item.name}</Text>
               </TouchableOpacity>
             )}
             contentContainerStyle={{ paddingHorizontal: 20 }}
@@ -91,7 +106,7 @@ const CategoriesPage = ({ navigation }) => {
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => {
                   //handle store data
-                  setModalVisible(!modalVisible)
+                  setModalVisible(!modalVisible);
                 }}
               >
                 <Text style={styles.borderButton}>Add</Text>
@@ -105,7 +120,9 @@ const CategoriesPage = ({ navigation }) => {
         menuOnPress={() => {
           navigation.navigate("Menu");
         }}
-        addItemOnPress={null}
+        addItemOnPress={() => {
+          navigation.navigate("AddCategory");
+        }}
       />
     </SafeAreaView>
   );
