@@ -71,8 +71,6 @@ const Home = () => {
           name="AddCategory"
           component={AddCategoryPage}
           options={setOption}
-
-
         />
         <Stack.Screen
           name="TransferHistory"

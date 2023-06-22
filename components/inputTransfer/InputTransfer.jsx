@@ -91,20 +91,23 @@ const InputTransfer = ({ style, addBtnOnPress }) => {
         if (transfer.amount > sender.amount)
             console.log("Error");
 
-        // addNewTransfer(transfer)
-        // processTransferMoney(transfer);
-        // addBtnOnPress(); //This is for navigating back to Account Page
+        addNewTransfer(transfer)
+        processTransferMoney(transfer);
+        addBtnOnPress(); //This is for navigating back to Account Page
 
         //console.log(transfer);
     };
 
     const renderErrorMessage = () => {
         if (sender !== null)
-            if (inputAmount > sender.amount) {
-                return <Text style={styles.errorText}>Transfer amount exceeds the available budget.</Text>;
-            }
+            if (inputAmount !== '' && inputAmount <= 0)
+                return <Text style={styles.errorText}>Transfer amount has to be more than 0.</Text>;
             else
-                return null;
+                if (inputAmount > sender.amount) {
+                    return <Text style={styles.errorText}>Transfer amount exceeds the available budget.</Text>;
+                }
+                else
+                    return null;
     };
 
     return (

@@ -31,7 +31,7 @@ const InputAccount = ({ style, addBtnOnPress }) => {
 
     const handleAddBtnPress = () => {
         const name = inputName;
-        const amount = inputAmount.trim() === ''? 0 : inputAmount;
+        const amount = inputAmount.trim() === '' ? 0 : inputAmount;
 
         // Check if the name input is empty
         const isEmpty = name.trim() === '';
@@ -41,14 +41,20 @@ const InputAccount = ({ style, addBtnOnPress }) => {
         //{----- Check and Update new account (money source) here -----}
         let account = {
             id: String(Math.floor(Date.now() / 100)),
-            name:inputName,
-            amount:Number(amount)
+            name: inputName,
+            amount: Number(amount)
         }
 
- 
+
         addAccount(account)
         addBtnOnPress();
     }
+
+    const renderErrorMessage = () => {
+        if (inputAmount !== '' && inputAmount <= 0)
+            return <Text style={styles.errorText}>Starting amount has to be more than 0.</Text>;
+        return null;
+    };
 
     return (
         <View style={[styles.container, style]}>
@@ -69,6 +75,7 @@ const InputAccount = ({ style, addBtnOnPress }) => {
                     keyboardType="numeric"
                     ref={amountInputRef}
                 />
+                {renderErrorMessage()}
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
