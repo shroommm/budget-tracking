@@ -88,12 +88,25 @@ const InputTransfer = ({ style, addBtnOnPress }) => {
             date: date
         };
 
-        addNewTransfer(transfer)
-        processTransferMoney(transfer);
-        addBtnOnPress(); //This is for navigating back to Account Page
+        if (transfer.amount > sender.amount)
+            console.log("Error");
 
-        console.log(transfer);
+        // addNewTransfer(transfer)
+        // processTransferMoney(transfer);
+        // addBtnOnPress(); //This is for navigating back to Account Page
+
+        //console.log(transfer);
     };
+
+    const renderErrorMessage = () => {
+        if (sender !== null)
+            if (inputAmount > sender.amount) {
+                return <Text style={styles.errorText}>Transfer amount exceeds the available budget.</Text>;
+            }
+            else
+                return null;
+    };
+
     return (
         <View style={[styles.container, style]}>
             <View style={styles.inputContainer}>
@@ -122,6 +135,7 @@ const InputTransfer = ({ style, addBtnOnPress }) => {
                     onChange={handleAmountChange}
                     keyboardType="numeric"
                 />
+                {renderErrorMessage()}
             </View>
             <View style={[styles.inputContainer, { zIndex: 9 }]}>
                 <Text style={styles.contextInput}>Receiver</Text>
