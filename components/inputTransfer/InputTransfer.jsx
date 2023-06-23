@@ -5,8 +5,9 @@ import DropDownPicker from "react-native-dropdown-picker";
 import styles from "./InputTransfer.style";
 import { addNewTransfer, getAccounts, processTransferMoney } from "../../utils/DataHandler";
 import { acc, log } from "react-native-reanimated";
+import { useEffect } from "react";
 
-const InputTransfer = ({ style, addBtnOnPress }) => {
+const InputTransfer = ({ style, addBtnOnPress, btnName, inputValue }) => {
     const accounts = getAccounts();
     const accountItems = accounts.map((account) => {
         return {
@@ -20,6 +21,16 @@ const InputTransfer = ({ style, addBtnOnPress }) => {
     //above => của duy
 
     const [inputAmount, setInputAmount] = useState("");
+
+    useEffect(() => {
+        if (inputValue !== null) {
+            const value = inputValue.params.param1;
+            setInputAmount(value);
+            console.log(inputAmount, value);
+        }
+    }, [])
+
+
 
     const [senderOpen, setSenderOpen] = useState(false);
     const [senderValue, setSenderValue] = useState(null);
@@ -165,7 +176,7 @@ const InputTransfer = ({ style, addBtnOnPress }) => {
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.addButton} onPress={handleAddBtnPress}>
-                    <Text style={styles.addButtonText}>Transfer</Text>
+                    <Text style={styles.addButtonText}>{btnName}</Text>
                 </TouchableOpacity>
             </View>
         </View>

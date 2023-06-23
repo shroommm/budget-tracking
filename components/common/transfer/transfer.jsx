@@ -11,7 +11,6 @@ export function Transfer({ item }) {
                     <Text style={styles.date}>{item.date}</Text>
                 </View>
                 <Text style={[styles.accName, styles.receiveAcc]}>{item.receiver}</Text>
-
             </TouchableOpacity>
 
         </View>

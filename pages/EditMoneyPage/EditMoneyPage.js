@@ -22,7 +22,7 @@ import {
   getIncomeCategories,
 } from "../../utils/DataHandler";
 
-const AddMoneyPage = ({ navigation }) => {
+const EditMoneyPage = ({ navigation }) => {
   //getData
   let accounts = getAccounts();
   let expenseCategories = getExpenseCategories();
@@ -128,7 +128,7 @@ const AddMoneyPage = ({ navigation }) => {
           }}
           style={styles.returnBtn}
         />
-        <Text style={styles.title}>Add money use</Text>
+        <Text style={styles.title}>Edit money use</Text>
       </View>
       <View style={styles.container}>
         <View
@@ -267,7 +267,7 @@ const AddMoneyPage = ({ navigation }) => {
           }}
           onPress={handleAddMoneyUse}
         >
-          <Text>Add</Text>
+          <Text>Change</Text>
         </TouchableOpacity>
       </View>
 
@@ -281,7 +281,7 @@ const AddMoneyPage = ({ navigation }) => {
   );
 };
 
-export default AddMoneyPage;
+export default EditMoneyPage;
 
 const styles = StyleSheet.create({
   container: {
