@@ -35,9 +35,11 @@ const InputAccount = ({ style, addBtnOnPress }) => {
 
         // Check if the name input is empty
         const isEmpty = name.trim() === '';
-
         console.log(name, amount, isEmpty);
 
+        if (name === '')
+            return
+    
         //{----- Check and Update new account (money source) here -----}
         let account = {
             id: String(Math.floor(Date.now() / 100)),
@@ -45,6 +47,8 @@ const InputAccount = ({ style, addBtnOnPress }) => {
             amount: Number(amount)
         }
 
+        if (inputAmount !== '' && inputAmount <= 0)
+            return
 
         addAccount(account)
         addBtnOnPress();

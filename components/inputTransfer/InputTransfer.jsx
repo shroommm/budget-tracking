@@ -5,8 +5,9 @@ import DropDownPicker from "react-native-dropdown-picker";
 import styles from "./InputTransfer.style";
 import { addNewTransfer, getAccounts, processTransferMoney } from "../../utils/DataHandler";
 import { acc, log } from "react-native-reanimated";
+import { useEffect } from "react";
 
-const InputTransfer = ({ style, addBtnOnPress }) => {
+const InputTransfer = ({ style, addBtnOnPress, btnName, inputValue }) => {
     const accounts = getAccounts();
     const accountItems = accounts.map((account) => {
         return {
@@ -20,6 +21,16 @@ const InputTransfer = ({ style, addBtnOnPress }) => {
     //above => của duy
 
     const [inputAmount, setInputAmount] = useState("");
+
+    useEffect(() => {
+        if (inputValue !== null) {
+            const value = inputValue.params.param1;
+            setInputAmount(value);
+            console.log(inputAmount, value);
+        }
+    }, [])
+
+
 
     const [senderOpen, setSenderOpen] = useState(false);
     const [senderValue, setSenderValue] = useState(null);
@@ -73,11 +84,13 @@ const InputTransfer = ({ style, addBtnOnPress }) => {
         const amount = inputAmount.trim() === "" ? 0 : inputAmount;
 
         console.log(senderValue, amount, receiverValue);
+        if (receiver == null || sender == null)
+            return
 
         //{----- Check and Update new account (money source) here -----}
 
         let dateFormat = new Date(Date.now());
-        let date = `${dateFormat.getDate()}/${dateFormat.getMonth()+1}/${dateFormat.getFullYear()}`;
+        let date = `${dateFormat.getDate()}/${dateFormat.getMonth() + 1}/${dateFormat.getFullYear()}`;
         let transfer = {
             id: String(Math.floor(Date.now() / 100)),
             sender: sender.label,
@@ -88,7 +101,7 @@ const InputTransfer = ({ style, addBtnOnPress }) => {
             date: date
         };
 
-        if (transfer.amount > sender.amount){
+        if ((transfer.amount > sender.amount)) {
             console.log("Error");
             return;
         }
@@ -96,6 +109,8 @@ const InputTransfer = ({ style, addBtnOnPress }) => {
         addNewTransfer(transfer)
         processTransferMoney(transfer);
         addBtnOnPress(); //This is for navigating back to Account Page
+
+
 
         //console.log(transfer);
     };
@@ -161,7 +176,7 @@ const InputTransfer = ({ style, addBtnOnPress }) => {
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.addButton} onPress={handleAddBtnPress}>
-                    <Text style={styles.addButtonText}>Transfer</Text>
+                    <Text style={styles.addButtonText}>{btnName}</Text>
                 </TouchableOpacity>
             </View>
         </View>

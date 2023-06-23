@@ -13,7 +13,7 @@ import { MenuBtn, InputTransfer } from "../../components";
 
 import left_icon from "../../asset/icons/left.png";
 
-const AddTransferPage = ({ navigation }) => {
+const EditTransferPage = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
       <View style={styles.container}>
@@ -25,7 +25,7 @@ const AddTransferPage = ({ navigation }) => {
           }}
           style={styles.returnBtn}
         />
-        <Text style={styles.title}>Create new transfer</Text>
+        <Text style={styles.title}>Edit transfer</Text>
       </View>
 
       <InputTransfer
@@ -33,13 +33,14 @@ const AddTransferPage = ({ navigation }) => {
         addBtnOnPress={() => {
           navigation.navigate("Account", { shouldRender: true });
         }}
-        btnName={'Transfer'}
+        btnName={'Confirm'}
+        inputValue={route}
       />
     </SafeAreaView>
   );
 };
 
-export default AddTransferPage;
+export default EditTransferPage;
 
 const styles = StyleSheet.create({
   container: {

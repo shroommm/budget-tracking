@@ -21,9 +21,8 @@ import {
   getExpenseCategories,
   getIncomeCategories,
 } from "../../utils/DataHandler";
-import { convertDateInAddMoney } from "../../utils/DateConverter";
 
-const AddMoneyPage = ({ navigation }) => {
+const EditMoneyPage = ({ navigation }) => {
   //getData
   let accounts = getAccounts();
   let expenseCategories = getExpenseCategories();
@@ -86,7 +85,6 @@ const AddMoneyPage = ({ navigation }) => {
 
   const handleConfirm = (date) => {
     console.warn("A date has been picked: ", date);
-    setDate(date);
     hideDatePicker();
   };
 
@@ -130,7 +128,7 @@ const AddMoneyPage = ({ navigation }) => {
           }}
           style={styles.returnBtn}
         />
-        <Text style={styles.title}>Add money use</Text>
+        <Text style={styles.title}>Edit money use</Text>
       </View>
       <View style={styles.container}>
         <View
@@ -210,7 +208,7 @@ const AddMoneyPage = ({ navigation }) => {
           }}
         >
           <View>
-            <Text>{convertDateInAddMoney(date)}</Text>
+            <Text>Today 06/14</Text>
           </View>
 
           <View>
@@ -269,7 +267,7 @@ const AddMoneyPage = ({ navigation }) => {
           }}
           onPress={handleAddMoneyUse}
         >
-          <Text>Add</Text>
+          <Text>Change</Text>
         </TouchableOpacity>
       </View>
 
@@ -283,7 +281,7 @@ const AddMoneyPage = ({ navigation }) => {
   );
 };
 
-export default AddMoneyPage;
+export default EditMoneyPage;
 
 const styles = StyleSheet.create({
   container: {
