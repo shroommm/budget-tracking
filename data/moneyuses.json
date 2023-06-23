@@ -4,41 +4,44 @@
     "category": "Grocery shopping",
     "date": "Fri Jun 23 2023 10:55:05 GMT+0700",
     "cost": 30000,
-    "type": "expense"
+    "type": "expense",
+    "accountId": "123456",
+    "account": "Cash"
   },
   {
     "id": "1686665302",
-    "category": "Gym",
+    "category": "Grocery shopping",
     "date": "Fri Jun 23 2023 10:55:05 GMT+0700",
-    "cost": 15000,
-    "type": "expense"
+    "cost": 30000,
+    "type": "expense",
+    "accountId": "123456",
+    "account": "Cash"
   },
   {
     "id": "1686665303",
-    "category": "Coffee",
+    "category": "Grocery shopping",
     "date": "Fri Jun 23 2023 10:55:05 GMT+0700",
-    "cost": 9000,
-    "type": "expense"
+    "cost": 30000,
+    "type": "expense",
+    "accountId": "123456",
+    "account": "Cash"
   },
   {
     "id": "1686665304",
-    "category": "Bar",
+    "category": "Grocery shopping",
     "date": "Fri Jun 23 2023 10:55:05 GMT+0700",
-    "cost": 29000,
-    "type": "expense"
+    "cost": 30000,
+    "type": "expense",
+    "accountId": "123456",
+    "account": "Cash"
   },
   {
     "id": "1686665305",
-    "category": "Salary",
+    "category": "Grocery shopping",
     "date": "Fri Jun 23 2023 10:55:05 GMT+0700",
-    "cost": 50000,
-    "type": "income"
-  },
-  {
-    "id": "1686665306",
-    "category": "Coin",
-    "date": "20 July 2021",
-    "cost": 25000,
-    "type": "income"
+    "cost": 30000,
+    "type": "expense",
+    "accountId": "123456",
+    "account": "Cash"
   }
 ]

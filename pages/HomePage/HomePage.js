@@ -7,35 +7,56 @@ import {
   StyleSheet,
   TouchableOpacity,
   SafeAreaView,
-  ScrollView,
   StatusBar,
 } from "react-native";
 
 import ExpenseItem from "../../components/ExpenseItem/ExpenseItem";
 
 import { BottomMenu } from "../../components";
-import { getExpenses, getIncomes, initializeSampleDataSetSyncStorage } from "../../utils/DataHandler";
+import {
+  getAccounts,
+  getExpenses,
+  getIncomes,
+  initializeSampleDataSetSyncStorage,
+} from "../../utils/DataHandler";
+import DropDownPicker from "react-native-dropdown-picker";
+import { useEffect } from "react";
 
+const HomePage = ({ navigation, route }) => {
+  //Force render page start
+  const [refreshKey, setRefreshKey] = useState(0);
+  const forceRender = () => {
+    setRefreshKey((prevKey) => prevKey + 1);
+  };
 
-const HomePage = ({ navigation,route }) => {
-    //Force render page start
-    const [refreshKey, setRefreshKey] = useState(0);
-    const forceRender = () => {
-      setRefreshKey((prevKey) => prevKey + 1);
+  if (route.params?.shouldRender) {
+    forceRender();
+    route.params.shouldRender = false;
+  }
+  //Force render page end
+  let accounts = getAccounts();
+  console.log(accounts)
+  accounts = accounts.map((account) => {
+    return {
+      id:account.id,
+      label: account.name,
+      value: account.id,
+      amount: account.amount,
     };
-  
-    if (route.params?.shouldRender) {
-      forceRender();
-      route.params.shouldRender = false;
-    }
-    //Force render page end
+  });
+  const [account, setAccount] = useState(
+    accounts.length > 0 ? accounts[0] : null
+  );
+
+  const [accountOpen, setAccountOpen] = useState(false);
+  const [accountValue, setAccountValue] = useState(null);
+  const [accountItems, setAccountsItems] = useState(accounts);
 
   let [isExpenseView, setIsExpenseView] = useState(true);
   let expenses = getExpenses();
   let incomes = getIncomes();
-  // let expenses = null;
-  // let incomes = null;
-
+  expenses = expenses.filter(expense => expense.accountId ==account.id);
+  incomes = incomes.filter(expense => expense.accountId ==account.id);
   const expensesSum = expenses.reduce(
     (accumulator, item) => accumulator + item.cost,
     0
@@ -44,11 +65,52 @@ const HomePage = ({ navigation,route }) => {
     (accumulator, item) => accumulator + item.cost,
     0
   );
+  const getAmountOfAccount = (id) => {
+    let accounts = getAccounts();
+    let account =  accounts.find(account => account.id ===id)
+    return account.amount;
+  }
+
+  const handleSelectAccountItem = (account) => {
+  
+    setAccount(account)
+  }
 
   return (
-    <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
+    <SafeAreaView style={{ flex: 1, paddingTop: 40,paddingBottom:60 }}>
       <StatusBar animated={true} backgroundColor="#61dafb" />
-      <Text style={{ textAlign: "center" }}>Home</Text>
+      {/* <Text style={{ textAlign: "center" }}>Home</Text> */}
+      <View style={{ paddingHorizontal: 20, zIndex: 30 }}>
+        <View style={[styles.inputContainer, { zIndex: 30 }]}>
+          <Text style={styles.contextInput}>Account</Text>
+          <DropDownPicker
+            open={accountOpen}
+            value={accountValue}
+            items={accountItems}
+            setOpen={setAccountOpen}
+            setValue={setAccountValue}
+            setItems={setAccountsItems}
+            style={styles.picker}
+            dropDownContainerStyle={styles.picker}
+            placeholder={account.label}
+            placeholderStyle={{ color: "grey" }}
+            
+            // onOpen={onReceiverOpen}
+            onSelectItem={handleSelectAccountItem}
+          />
+          <Text
+            style={{
+              ...styles.$5000000,
+              paddingTop: 10,
+              color: "black",
+              zIndex:-1
+            }}
+          >
+            {getAmountOfAccount(account.id).toLocaleString() + " VND"}
+          </Text>
+        </View>
+      </View>
+
       <View
         style={{
           ...styles.root,
@@ -69,7 +131,7 @@ const HomePage = ({ navigation,route }) => {
           style={{
             ...styles.$5000000,
             paddingBottom: 28,
-            paddingTop: 22,
+            paddingTop: 10,
             color: isExpenseView ? "#ef5354" : "green",
           }}
         >
@@ -105,16 +167,17 @@ const HomePage = ({ navigation,route }) => {
         </View>
       </View>
 
-      <View style={{ paddingHorizontal: 20 }}>
+      <View style={{ paddingHorizontal: 20,flex:1 }}>
         <Text>Categories</Text>
-        <View>
+
           <FlatList
             data={isExpenseView ? expenses : incomes}
             renderItem={({ item }) => <ExpenseItem item={item} />}
             keyExtractor={(item) => item?.id}
             showsVerticalScrollIndicator={false}
+      
           />
-        </View>
+
       </View>
       <BottomMenu
         menuOnPress={() => {
@@ -170,5 +233,32 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textAlignVertical: "top",
     color: "#313131",
+  },
+  inputContainer: {
+    paddingVertical: 15,
+    zIndex: 10,
+  },
+  contextInput: {
+    marginBottom: 3,
+    textAlign: "center",
+  },
+  picker: {
+    borderWidth: 0,
+    backgroundColor: "white",
+    borderRadius: 6,
+    paddingVertical: 9,
+    paddingHorizontal: 12,
+
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.17,
+    shadowRadius: 2.54,
+    elevation: 3,
+
+    fontSize: 17,
+    zIndex:999
   },
 });

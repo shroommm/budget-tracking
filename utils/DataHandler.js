@@ -77,9 +77,21 @@ export const addAccount = (moneySource) => {
 
 export const addMoneyUse = (moneyUse) => {
   let moneyUses = SyncStorage.get("moneyuses");
-
+  let accounts = getAccounts();
+  accounts.forEach(account => {
+    if(account.id==moneyUse.accountId) {
+      console.log("vao day")
+      if(moneyUse.type==="expense") {
+        account.amount-=moneyUse.cost
+      }
+      else {
+        account.amount+=moneyUse.cost
+      }
+    }
+  })
   moneyUses.push(moneyUse);
 
+  SyncStorage.set("accounts", accounts);
   SyncStorage.set("moneyuses", moneyUses);
 };
 //Data with async storage

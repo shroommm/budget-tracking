@@ -21,6 +21,7 @@ import {
   getExpenseCategories,
   getIncomeCategories,
 } from "../../utils/DataHandler";
+import { convertDateInAddMoney } from "../../utils/DateConverter";
 
 const AddMoneyPage = ({ navigation }) => {
   //getData
@@ -85,6 +86,7 @@ const AddMoneyPage = ({ navigation }) => {
 
   const handleConfirm = (date) => {
     console.warn("A date has been picked: ", date);
+    setDate(date);
     hideDatePicker();
   };
 
@@ -201,7 +203,7 @@ const AddMoneyPage = ({ navigation }) => {
           }}
         >
           <View>
-            <Text>Today 06/14</Text>
+            <Text>{convertDateInAddMoney(date)}</Text>
           </View>
 
           <View>
