@@ -13,7 +13,7 @@ import { MenuBtn, InputAccount } from "../../components";
 
 import left_icon from "../../asset/icons/left.png";
 
-const AddPaymentMethodPage = ({ navigation }) => {
+const EditPaymentMethodPage = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
       <View style={styles.container}>
@@ -25,7 +25,7 @@ const AddPaymentMethodPage = ({ navigation }) => {
           }}
           style={styles.returnBtn}
         />
-        <Text style={styles.title}>Add money source</Text>
+        <Text style={styles.title}>Edit money source</Text>
       </View>
 
       <InputAccount
@@ -33,13 +33,13 @@ const AddPaymentMethodPage = ({ navigation }) => {
         addBtnOnPress={() => {
           navigation.navigate("Account", { shouldRender: true });
         }}
-        btnName={'Add'}
+        btnName={'Confirm'}
       />
     </SafeAreaView>
   );
 };
 
-export default AddPaymentMethodPage;
+export default EditPaymentMethodPage;
 
 const styles = StyleSheet.create({
   container: {

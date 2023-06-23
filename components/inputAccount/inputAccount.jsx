@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import styles from "./inputAccount.style";
 import { addAccount } from "../../utils/DataHandler";
 
-const InputAccount = ({ style, addBtnOnPress }) => {
+const InputAccount = ({ style, addBtnOnPress, btnName }) => {
     const [inputAmount, setInputAmount] = useState('');
     const [inputName, setInputName] = useState('');
 
@@ -86,7 +86,7 @@ const InputAccount = ({ style, addBtnOnPress }) => {
                     style={styles.addButton}
                     onPress={handleAddBtnPress}
                 >
-                    <Text style={styles.addButtonText}>Add</Text>
+                    <Text style={styles.addButtonText}>{btnName}</Text>
                 </TouchableOpacity>
             </View>
         </View>
