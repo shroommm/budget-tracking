@@ -15,22 +15,56 @@ import {
 import { Input } from "@rneui/themed";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { BottomMenu } from "../../components";
+import DropDownPicker from "react-native-dropdown-picker";
+import {
+  getAccounts,
+  getCategories,
+  getExpenseCategories,
+  getIncomeCategories,
+} from "../../utils/DataHandler";
 
 const AddMoneyPage = ({ navigation }) => {
+  //getData
+  let accounts = getAccounts();
+  let expenseCategories = getExpenseCategories();
+  let incomeCategories = getIncomeCategories();
+
+  accounts = accounts.map((account) => {
+    return {
+      label: account.name,
+      value: account.id,
+    };
+  });
+
+  expenseCategories = expenseCategories.map((category) => {
+    return {
+      label: category.name,
+      value: category.id,
+    };
+  });
+
+  incomeCategories = incomeCategories.map((category) => {
+    return {
+      label: category.name,
+      value: category.id,
+    };
+  });
+
   const [inputValue, setInputValue] = useState("");
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [date, setDate] = useState(new Date());
   const [isExpense, setIsExpense] = useState(true);
-  const modalComponent = (props) => {
-    return (
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}
-      >
-        <Text style={styles.textStyle}>Show Modal</Text>
-      </Pressable>
-    );
-  };
+
+  const [accountOpen, setAccountOpen] = useState(false);
+  const [categoryOpen, setCategoryOpen] = useState(false);
+
+  const [accountValue, setAccountValue] = useState(null);
+  const [categoryValue, setCategoryValue] = useState(null);
+
+  const [accountItems, setAccountsItems] = useState(accounts);
+  const [categoryItems, setCategoryItems] = useState(
+    isExpense ? expenseCategories : incomeCategories
+  );
 
   const handleInputChange = (text) => {
     // Remove any non-numeric characters from the input value
@@ -51,8 +85,17 @@ const AddMoneyPage = ({ navigation }) => {
     hideDatePicker();
   };
 
-  const currentDate = new Date();
-  const timestamp = currentDate.getTime();
+  const handleAddMoneyUse = () => {
+    console.log(inputValue);
+    let moneyUse = {
+      id: "1686665302",
+      category: "Gym",
+      date: "23 July 2021",
+      cost: 15000,
+      type: "expense",
+    };
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
       <View style={styles.container}>
@@ -95,7 +138,8 @@ const AddMoneyPage = ({ navigation }) => {
               borderColor: "#FE4848",
             }}
             onPress={() => {
-              setIsExpense(true)
+              setIsExpense(true);
+              setCategoryItems(expenseCategories);
             }}
           >
             <Text style={{ textAlign: "center", fontWeight: "bold" }}>
@@ -113,7 +157,8 @@ const AddMoneyPage = ({ navigation }) => {
               borderColor: "#009900",
             }}
             onPress={() => {
-              setIsExpense(false)
+              setIsExpense(false);
+              setCategoryItems(incomeCategories);
             }}
           >
             <Text style={{ textAlign: "center", fontWeight: "bold" }}>
@@ -136,8 +181,8 @@ const AddMoneyPage = ({ navigation }) => {
 
           <View>
             <Button title="Choose date" onPress={showDatePicker} />
-
             <DateTimePickerModal
+              value={date}
               isVisible={isDatePickerVisible}
               mode="date"
               onConfirm={handleConfirm}
@@ -146,65 +191,39 @@ const AddMoneyPage = ({ navigation }) => {
           </View>
         </View>
 
-        <View>
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {
-              Alert.alert("Modal has been closed.");
-              setModalVisible(!modalVisible);
-            }}
-          >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Text style={styles.modalText}>Category</Text>
-                <FlatList/>
-                <Pressable
-                  style={[styles.button, styles.buttonClose]}
-                  onPress={() => setModalVisible(!modalVisible)}
-                >
-                  <Text style={styles.textStyle}>Close</Text>
-                </Pressable>
-              </View>
-            </View>
-          </Modal>
+        <View style={[styles.inputContainer, { zIndex: 30 }]}>
+          <Text style={styles.contextInput}>Method</Text>
+          <DropDownPicker
+            open={accountOpen}
+            value={accountValue}
+            items={accountItems}
+            setOpen={setAccountOpen}
+            setValue={setAccountValue}
+            setItems={setAccountsItems}
+            style={styles.picker}
+            dropDownContainerStyle={styles.picker}
+            placeholder="Select the receiver"
+            placeholderStyle={{ color: "grey" }}
+            // onOpen={onReceiverOpen}
+            // onSelectItem={handleSelectReceiver}
+          />
         </View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            width: "100%",
-            gap: 15,
-            marginBottom: 10,
-          }}
-        >
-          <Pressable
-            style={[styles.button, styles.buttonOpen]}
-            onPress={() => setModalVisible(true)}
-          >
-            <Text style={styles.textStyle}>Method</Text>
-          </Pressable>
-          <Text>Cash</Text>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            width: "100%",
-            gap: 15,
-            marginBottom: 10,
-          }}
-        >
-          <Pressable
-            style={[styles.button, styles.buttonOpen]}
-            onPress={() => setModalVisible(true)}
-          >
-            <Text style={styles.textStyle}>Category</Text>
-          </Pressable>
-          <Text>Shopping</Text>
+        <View style={[styles.inputContainer, { zIndex: 20 }]}>
+          <Text style={styles.contextInput}>Category</Text>
+          <DropDownPicker
+            open={categoryOpen}
+            value={categoryValue}
+            items={categoryItems}
+            setOpen={setCategoryOpen}
+            setValue={setCategoryValue}
+            setItems={setCategoryItems}
+            style={styles.picker}
+            dropDownContainerStyle={styles.picker}
+            placeholder="Select the receiver"
+            placeholderStyle={{ color: "grey" }}
+            // onOpen={onReceiverOpen}
+            // onSelectItem={handleSelectReceiver}
+          />
         </View>
 
         <TouchableOpacity
@@ -214,6 +233,7 @@ const AddMoneyPage = ({ navigation }) => {
             paddingVertical: 10,
             borderRadius: 15,
           }}
+          onPress={handleAddMoneyUse}
         >
           <Text>Add</Text>
         </TouchableOpacity>
@@ -292,5 +312,31 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center",
+  },
+  picker: {
+    borderWidth: 0,
+    backgroundColor: "white",
+    borderRadius: 6,
+    paddingVertical: 9,
+    paddingHorizontal: 12,
+
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.17,
+    shadowRadius: 2.54,
+    elevation: 3,
+
+    fontSize: 17,
+  },
+  inputContainer: {
+    paddingVertical: 15,
+    zIndex: 10,
+  },
+  contextInput: {
+    marginLeft: 10,
+    marginBottom: 3,
   },
 });

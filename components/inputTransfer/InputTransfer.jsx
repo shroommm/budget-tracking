@@ -62,7 +62,8 @@ const InputTransfer = ({ style, addBtnOnPress }) => {
     //{----- Check and Update new account (money source) here -----}
 
     let dateFormat =new Date(Date.now());
-    let date =`${dateFormat.getDate()}/${dateFormat.getMonth()}/${dateFormat.getFullYear()}`;
+    let date =`${dateFormat.getDate()}/${dateFormat.getMonth() + 1}/${dateFormat.getFullYear()}`;
+
     let transfer = {
       id: String(Math.floor(Date.now() / 100)),
       sender: sender.label,
