@@ -38,7 +38,7 @@ const AccountPage = ({ navigation, route }) => {
         }}
       />
 
-      <AccountDetail />
+      <AccountDetail style={{ paddingBottom: 60 }} />
 
       <BottomMenu
         menuOnPress={() => {
