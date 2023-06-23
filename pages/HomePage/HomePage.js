@@ -17,7 +17,18 @@ import { BottomMenu } from "../../components";
 import { getExpenses, getIncomes, initializeSampleDataSetSyncStorage } from "../../utils/DataHandler";
 
 
-const HomePage = ({ navigation }) => {
+const HomePage = ({ navigation,route }) => {
+    //Force render page start
+    const [refreshKey, setRefreshKey] = useState(0);
+    const forceRender = () => {
+      setRefreshKey((prevKey) => prevKey + 1);
+    };
+  
+    if (route.params?.shouldRender) {
+      forceRender();
+      route.params.shouldRender = false;
+    }
+    //Force render page end
 
   let [isExpenseView, setIsExpenseView] = useState(true);
   let expenses = getExpenses();
@@ -100,7 +111,7 @@ const HomePage = ({ navigation }) => {
           <FlatList
             data={isExpenseView ? expenses : incomes}
             renderItem={({ item }) => <ExpenseItem item={item} />}
-            keyExtractor={(item) => item?.cost}
+            keyExtractor={(item) => item?.id}
             showsVerticalScrollIndicator={false}
           />
         </View>

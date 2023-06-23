@@ -1,12 +1,14 @@
 import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
+import { convertCorrectDate } from "../../utils/DateConverter";
 
 export function ExpenseItem({ item }) {
+
   return (
     <TouchableOpacity style={styles.root}>
       <View style={styles.info}>
         <Text style={styles.groceryShopping}>{item.category}</Text>
-        <Text style={styles.$22July$2021}>{item.date}</Text>
+        <Text style={styles.$22July$2021}>{convertCorrectDate(item.date)}</Text>
       </View>
       <Text
         style={{
