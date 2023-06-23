@@ -8,15 +8,14 @@ import {
   TouchableOpacity,
   TextInput,
   Button,
-  Pressable,
-  Modal,
-  FlatList,
 } from "react-native";
 import { Input } from "@rneui/themed";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { BottomMenu } from "../../components";
+import { BottomMenu, MenuBtn } from "../../components";
 import DropDownPicker from "react-native-dropdown-picker";
+import left_icon from "../../asset/icons/left.png";
 import {
+  addMoneyUse,
   getAccounts,
   getCategories,
   getExpenseCategories,
@@ -33,6 +32,7 @@ const AddMoneyPage = ({ navigation }) => {
     return {
       label: account.name,
       value: account.id,
+      amount: account.amount,
     };
   });
 
@@ -54,6 +54,9 @@ const AddMoneyPage = ({ navigation }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [date, setDate] = useState(new Date());
   const [isExpense, setIsExpense] = useState(true);
+
+  const [category, setCategory] = useState(null);
+  const [account, setAccount] = useState(null);
 
   const [accountOpen, setAccountOpen] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
@@ -85,19 +88,41 @@ const AddMoneyPage = ({ navigation }) => {
     hideDatePicker();
   };
 
+  const handleSelectAccount = (account) => {
+    setAccount(account);
+  };
+  const handleSelectCategory = (category) => {
+    setCategory(category);
+  };
+
   const handleAddMoneyUse = () => {
     console.log(inputValue);
     let moneyUse = {
-      id: "1686665302",
-      category: "Gym",
-      date: "23 July 2021",
-      cost: 15000,
-      type: "expense",
+      id: String(Date.now()),
+      category: category.label,
+      accountId: accountValue,
+      account: account.label,
+      date: String(date),
+      cost: Number(inputValue),
+      type: isExpense ? "expense" : "income",
     };
+
+    addMoneyUse(moneyUse);
   };
 
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
+      <View style={styles.containerReturnBtn}>
+        <MenuBtn
+          iconUrl={left_icon}
+          dimension={"70%"}
+          handlePress={() => {
+            navigation.navigate("Home", { shouldRender: true });
+          }}
+          style={styles.returnBtn}
+        />
+        <Text style={styles.title}>Add money use</Text>
+      </View>
       <View style={styles.container}>
         <View
           style={{
@@ -205,7 +230,7 @@ const AddMoneyPage = ({ navigation }) => {
             placeholder="Select the receiver"
             placeholderStyle={{ color: "grey" }}
             // onOpen={onReceiverOpen}
-            // onSelectItem={handleSelectReceiver}
+            onSelectItem={handleSelectAccount}
           />
         </View>
         <View style={[styles.inputContainer, { zIndex: 20 }]}>
@@ -222,7 +247,7 @@ const AddMoneyPage = ({ navigation }) => {
             placeholder="Select the receiver"
             placeholderStyle={{ color: "grey" }}
             // onOpen={onReceiverOpen}
-            // onSelectItem={handleSelectReceiver}
+            onSelectItem={handleSelectCategory}
           />
         </View>
 
@@ -239,12 +264,12 @@ const AddMoneyPage = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
-      <BottomMenu
+      {/* <BottomMenu
         menuOnPress={() => {
           navigation.navigate("Menu");
         }}
         addItemOnPress={null}
-      />
+      /> */}
     </SafeAreaView>
   );
 };
@@ -259,6 +284,21 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
     width: "90%",
+  },
+  containerReturnBtn: {
+    alignItems: "flex-start",
+    paddingTop: 30,
+    paddingBottom: 10,
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  title: {},
+  returnBtn: {
+    position: "absolute",
+    height: 40,
+    width: 40,
+    top: 22,
+    left: "4%",
   },
   input: {
     borderWidth: 1,

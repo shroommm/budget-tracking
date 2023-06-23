@@ -74,6 +74,14 @@ export const addAccount = (moneySource) => {
 
   SyncStorage.set("accounts", accounts);
 };
+
+export const addMoneyUse = (moneyUse) => {
+  let moneyUses = SyncStorage.get("moneyuses");
+
+  moneyUses.push(moneyUse);
+
+  SyncStorage.set("moneyuses", moneyUses);
+};
 //Data with async storage
 
 // const storeData = async (key, value) => {
