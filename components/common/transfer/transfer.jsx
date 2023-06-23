@@ -4,7 +4,7 @@ import styles from './transfer.style'
 export function Transfer({ item }) {
     return (
         <View style={styles.container}>
-            <View style={styles.transferContainer}>
+            <TouchableOpacity style={styles.transferContainer}>
                 <Text style={[styles.accName, styles.giveAcc]}>{item.sender}</Text>
                 <View>
                     <Text style={styles.amount} numberOfLines={1}>{item.amount.toLocaleString()} VND</Text>
@@ -12,7 +12,7 @@ export function Transfer({ item }) {
                 </View>
                 <Text style={[styles.accName, styles.receiveAcc]}>{item.receiver}</Text>
 
-            </View>
+            </TouchableOpacity>
 
         </View>
     );

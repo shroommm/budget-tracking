@@ -73,11 +73,13 @@ const InputTransfer = ({ style, addBtnOnPress }) => {
         const amount = inputAmount.trim() === "" ? 0 : inputAmount;
 
         console.log(senderValue, amount, receiverValue);
+        if (receiver == null || sender == null)
+            return
 
         //{----- Check and Update new account (money source) here -----}
 
         let dateFormat = new Date(Date.now());
-        let date = `${dateFormat.getDate()}/${dateFormat.getMonth()+1}/${dateFormat.getFullYear()}`;
+        let date = `${dateFormat.getDate()}/${dateFormat.getMonth() + 1}/${dateFormat.getFullYear()}`;
         let transfer = {
             id: String(Math.floor(Date.now() / 100)),
             sender: sender.label,
@@ -88,7 +90,7 @@ const InputTransfer = ({ style, addBtnOnPress }) => {
             date: date
         };
 
-        if (transfer.amount > sender.amount){
+        if ((transfer.amount > sender.amount)) {
             console.log("Error");
             return;
         }
@@ -96,6 +98,8 @@ const InputTransfer = ({ style, addBtnOnPress }) => {
         addNewTransfer(transfer)
         processTransferMoney(transfer);
         addBtnOnPress(); //This is for navigating back to Account Page
+
+
 
         //console.log(transfer);
     };

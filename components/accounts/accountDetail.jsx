@@ -3,6 +3,7 @@ import { Account } from "../common/account/accounts.jsx"
 
 import styles from './accountDetail.style'
 import { getAccounts } from "../../utils/DataHandler.js";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const AccountDetail = () => {
     let accounts = getAccounts();
