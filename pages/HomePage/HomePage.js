@@ -101,6 +101,7 @@ const HomePage = ({ navigation }) => {
             data={isExpenseView ? expenses : incomes}
             renderItem={({ item }) => <ExpenseItem item={item} />}
             keyExtractor={(item) => item?.cost}
+            showsVerticalScrollIndicator={false}
           />
         </View>
       </View>

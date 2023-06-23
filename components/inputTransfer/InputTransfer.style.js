@@ -73,7 +73,14 @@ const styles = StyleSheet.create({
         elevation: 3,
 
         fontSize: 17,
+    },
+    errorText: {
+        color: '#ff8080',
+        fontSize: 13,
+        marginLeft: 13,
+        marginTop: 3,
     }
+
 })
 
 export default styles;

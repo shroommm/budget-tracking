@@ -55,6 +55,12 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
     },
+    errorText: {
+        color: '#ff8080',
+        fontSize: 13,
+        marginLeft: 13,
+        marginTop: 3,
+    },
 
 })
 
