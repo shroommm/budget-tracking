@@ -5,13 +5,13 @@ import styles from './accountDetail.style'
 import { getAccounts } from "../../utils/DataHandler.js";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const AccountDetail = () => {
+const AccountDetail = ({style}) => {
     let accounts = getAccounts();
     const data = accounts;
     const isLoading = false;
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, style]}>
             <FlatList
                 data={data}
                 renderItem={({ item }) => (

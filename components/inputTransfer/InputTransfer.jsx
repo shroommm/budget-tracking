@@ -22,16 +22,6 @@ const InputTransfer = ({ style, addBtnOnPress, btnName, inputValue }) => {
 
     const [inputAmount, setInputAmount] = useState("");
 
-    useEffect(() => {
-        if (inputValue !== null) {
-            const value = inputValue.params.param1;
-            setInputAmount(value);
-            console.log(inputAmount, value);
-        }
-    }, [])
-
-
-
     const [senderOpen, setSenderOpen] = useState(false);
     const [senderValue, setSenderValue] = useState(null);
     const [senderItems, setSenderItems] = useState(accountItems);

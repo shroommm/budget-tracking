@@ -34,11 +34,11 @@ const AccountPage = ({ navigation, route }) => {
           navigation.navigate("TransferHistory");
         }}
         newTransferOnPress={() => {
-          navigation.navigate("AddTransfer", {param1: 1000, param2:'world 2'});
+          navigation.navigate("AddTransfer");
         }}
       />
 
-      <AccountDetail />
+      <AccountDetail style={{ paddingBottom: 60 }} />
 
       <BottomMenu
         menuOnPress={() => {

@@ -14,6 +14,7 @@ import AddTransferPage from "../pages/AddTransferPage/AddTransferPage";
 import AddCategoryPage from "../pages/AddCategoryPage/AddCategoryPage";
 import EditMoneyPage from "../pages/EditMoneyPage/EditMoneyPage";
 import EditTransferPage from "../pages/EditTransferPage/EditTransferPage";
+import EditPaymentMethodPage from "../pages/EditPaymentMethodPage/EditPaymentMethodPage";
 
 import { useEffect } from "react";
 import { initializeSampleDataSetSyncStorage } from "../utils/DataHandler";
@@ -92,6 +93,11 @@ const Home = () => {
         <Stack.Screen
           name="EditTransfer"
           component={EditTransferPage}
+          options={setOption}
+        />
+        <Stack.Screen
+          name="EditPaymentMethod"
+          component={EditPaymentMethodPage}
           options={setOption}
         />
       </Stack.Navigator>
