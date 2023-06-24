@@ -16,14 +16,19 @@ import DropDownPicker from "react-native-dropdown-picker";
 import left_icon from "../../asset/icons/left.png";
 import {
   addMoneyUse,
+  changeMoneyUse,
+  deleteMoneyUse,
   getAccounts,
   getCategories,
   getExpenseCategories,
   getIncomeCategories,
 } from "../../utils/DataHandler";
+import { convertDateInAddMoney } from "../../utils/DateConverter";
 
-const EditMoneyPage = ({ navigation }) => {
-  //getData
+const EditMoneyPage = ({ navigation, route }) => {
+  //GetData
+  let { editMoneyUse } = route.params;
+
   let accounts = getAccounts();
   let expenseCategories = getExpenseCategories();
   let incomeCategories = getIncomeCategories();
@@ -50,19 +55,25 @@ const EditMoneyPage = ({ navigation }) => {
     };
   });
 
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(String(editMoneyUse.cost));
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [date, setDate] = useState(new Date());
-  const [isExpense, setIsExpense] = useState(true);
+  const [date, setDate] = useState(new Date(editMoneyUse.date));
+  const [isExpense, setIsExpense] = useState(editMoneyUse.type === "expense");
 
-  const [category, setCategory] = useState(null);
-  const [account, setAccount] = useState(null);
+  const [category, setCategory] = useState({
+    label: editMoneyUse.category,
+    value: editMoneyUse.categoryId,
+  });
+  const [account, setAccount] = useState({
+    label: editMoneyUse.account,
+    value: editMoneyUse.accountId,
+  });
 
   const [accountOpen, setAccountOpen] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
 
-  const [accountValue, setAccountValue] = useState(null);
-  const [categoryValue, setCategoryValue] = useState(null);
+  const [accountValue, setAccountValue] = useState(editMoneyUse.accountId);
+  const [categoryValue, setCategoryValue] = useState(editMoneyUse.categoryId);
 
   const [accountItems, setAccountsItems] = useState(accounts);
   const [categoryItems, setCategoryItems] = useState(
@@ -84,7 +95,8 @@ const EditMoneyPage = ({ navigation }) => {
   };
 
   const handleConfirm = (date) => {
-    console.warn("A date has been picked: ", date);
+    // console.warn("A date has been picked: ", date);
+    setDate(date);
     hideDatePicker();
   };
 
@@ -95,15 +107,14 @@ const EditMoneyPage = ({ navigation }) => {
     setCategory(category);
   };
 
-  const handleAddMoneyUse = () => {
-    console.log(inputValue);
-
-    if (inputValue === '' || accountValue === null || accountValue === null)
+  const handleChangeMoneyUse = () => {
+    if (inputValue === "" || accountValue === null || categoryValue === null)
       return;
 
     let moneyUse = {
-      id: String(Date.now()),
+      id: editMoneyUse.id,
       category: category.label,
+      categoryId: category.value,
       accountId: accountValue,
       account: account.label,
       date: String(date),
@@ -111,10 +122,11 @@ const EditMoneyPage = ({ navigation }) => {
       type: isExpense ? "expense" : "income",
     };
 
+    changeMoneyUse(moneyUse);
+  };
 
-
-
-    addMoneyUse(moneyUse);
+  const handleDeleteMoneyUse = () => {
+    deleteMoneyUse(editMoneyUse.id);
   };
 
   return (
@@ -139,7 +151,6 @@ const EditMoneyPage = ({ navigation }) => {
             alignItems: "center",
             borderRadius: 15,
             padding: 10,
-            backgroundColor: "#94C3F6",
           }}
         >
           <TextInput
@@ -147,6 +158,7 @@ const EditMoneyPage = ({ navigation }) => {
             onChangeText={handleInputChange}
             placeholder="Enter money"
             keyboardType="numeric"
+            value={inputValue}
           />
           <Text style={{ fontSize: 30 }}>VND</Text>
         </View>
@@ -208,7 +220,7 @@ const EditMoneyPage = ({ navigation }) => {
           }}
         >
           <View>
-            <Text>Today 06/14</Text>
+            <Text>{convertDateInAddMoney(date)}</Text>
           </View>
 
           <View>
@@ -257,18 +269,30 @@ const EditMoneyPage = ({ navigation }) => {
             onSelectItem={handleSelectCategory}
           />
         </View>
-
-        <TouchableOpacity
-          style={{
-            backgroundColor: "red",
-            paddingHorizontal: "10%",
-            paddingVertical: 10,
-            borderRadius: 15,
-          }}
-          onPress={handleAddMoneyUse}
-        >
-          <Text>Change</Text>
-        </TouchableOpacity>
+        <View style={{ flexDirection: "row", gap: 10 }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#e33243",
+              paddingHorizontal: "10%",
+              paddingVertical: 10,
+              borderRadius: 15,
+            }}
+            onPress={handleDeleteMoneyUse}
+          >
+            <Text>Delete</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#94C3F6",
+              paddingHorizontal: "10%",
+              paddingVertical: 10,
+              borderRadius: 15,
+            }}
+            onPress={handleChangeMoneyUse}
+          >
+            <Text>Change</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       {/* <BottomMenu

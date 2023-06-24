@@ -20,9 +20,7 @@ import { initializeSampleDataSetSyncStorage } from "../utils/DataHandler";
 import { useState } from "react";
 import { useCallback } from "react";
 import { LogBox } from 'react-native';
-LogBox.ignoreLogs([
-  'Non-serializable values were found in the navigation state',
-]);
+
 LogBox.ignoreAllLogs();//Ignore all log notifications
 const Stack = createNativeStackNavigator();
 

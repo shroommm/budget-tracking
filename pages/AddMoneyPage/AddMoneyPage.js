@@ -106,15 +106,13 @@ const AddMoneyPage = ({ navigation }) => {
     let moneyUse = {
       id: String(Date.now()),
       category: category.label,
+      categoryId: categoryValue,
       accountId: accountValue,
       account: account.label,
       date: String(date),
       cost: Number(inputValue),
       type: isExpense ? "expense" : "income",
     };
-
-
-
 
     addMoneyUse(moneyUse);
   };

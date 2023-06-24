@@ -35,10 +35,10 @@ const HomePage = ({ navigation, route }) => {
   }
   //Force render page end
   let accounts = getAccounts();
-  console.log(accounts)
+  console.log(accounts);
   accounts = accounts.map((account) => {
     return {
-      id:account.id,
+      id: account.id,
       label: account.name,
       value: account.id,
       amount: account.amount,
@@ -55,8 +55,8 @@ const HomePage = ({ navigation, route }) => {
   let [isExpenseView, setIsExpenseView] = useState(true);
   let expenses = getExpenses();
   let incomes = getIncomes();
-  expenses = expenses.filter(expense => expense.accountId ==account.id);
-  incomes = incomes.filter(expense => expense.accountId ==account.id);
+  expenses = expenses.filter((expense) => expense.accountId == account.id);
+  incomes = incomes.filter((expense) => expense.accountId == account.id);
   const expensesSum = expenses.reduce(
     (accumulator, item) => accumulator + item.cost,
     0
@@ -67,17 +67,16 @@ const HomePage = ({ navigation, route }) => {
   );
   const getAmountOfAccount = (id) => {
     let accounts = getAccounts();
-    let account =  accounts.find(account => account.id ===id)
+    let account = accounts.find((account) => account.id === id);
     return account.amount;
-  }
+  };
 
   const handleSelectAccountItem = (account) => {
-  
-    setAccount(account)
-  }
+    setAccount(account);
+  };
 
   return (
-    <SafeAreaView style={{ flex: 1, paddingTop: 40,paddingBottom:60 }}>
+    <SafeAreaView style={{ flex: 1, paddingTop: 40, paddingBottom: 60 }}>
       <StatusBar animated={true} backgroundColor="#61dafb" />
       {/* <Text style={{ textAlign: "center" }}>Home</Text> */}
       <View style={{ paddingHorizontal: 20, zIndex: 30 }}>
@@ -94,7 +93,6 @@ const HomePage = ({ navigation, route }) => {
             dropDownContainerStyle={styles.picker}
             placeholder={account.label}
             placeholderStyle={{ color: "grey" }}
-            
             // onOpen={onReceiverOpen}
             onSelectItem={handleSelectAccountItem}
           />
@@ -103,7 +101,7 @@ const HomePage = ({ navigation, route }) => {
               ...styles.$5000000,
               paddingTop: 10,
               color: "black",
-              zIndex:-1
+              zIndex: -1,
             }}
           >
             {getAmountOfAccount(account.id).toLocaleString() + " VND"}
@@ -167,17 +165,17 @@ const HomePage = ({ navigation, route }) => {
         </View>
       </View>
 
-      <View style={{ paddingHorizontal: 20,flex:1 }}>
+      <View style={{ paddingHorizontal: 20, flex: 1 }}>
         <Text>Categories</Text>
 
-          <FlatList
-            data={isExpenseView ? expenses : incomes}
-            renderItem={({ item }) => <ExpenseItem item={item} />}
-            keyExtractor={(item) => item?.id}
-            showsVerticalScrollIndicator={false}
-      
-          />
-
+        <FlatList
+          data={isExpenseView ? expenses : incomes}
+          renderItem={({ item }) => (
+            <ExpenseItem item={item} navigation={navigation} />
+          )}
+          keyExtractor={(item) => item?.id}
+          showsVerticalScrollIndicator={false}
+        />
       </View>
       <BottomMenu
         menuOnPress={() => {
@@ -259,6 +257,6 @@ const styles = StyleSheet.create({
     elevation: 3,
 
     fontSize: 17,
-    zIndex:999
+    zIndex: 999,
   },
 });

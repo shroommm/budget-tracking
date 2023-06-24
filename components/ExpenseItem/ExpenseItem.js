@@ -2,9 +2,16 @@ import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { convertCorrectDate } from "../../utils/DateConverter";
 
-export function ExpenseItem({ item }) {
+export function ExpenseItem({ item, navigation }) {
   return (
-    <TouchableOpacity style={styles.root}>
+    <TouchableOpacity
+      style={styles.root}
+      onPress={() => {
+        navigation.navigate("EditMoney",{
+          editMoneyUse:item
+        });
+      }}
+    >
       <View style={styles.info}>
         <Text style={styles.groceryShopping}>{item.category}</Text>
         <Text style={styles.$22July$2021}>{convertCorrectDate(item.date)}</Text>
@@ -19,7 +26,7 @@ export function ExpenseItem({ item }) {
         >
           {`${item.cost.toLocaleString()} VND`}
         </Text>
-        <Text style={{ marginRight: "auto" }}>{item.account}</Text>
+        <Text style={{ marginLeft: "auto" }}>{item.account}</Text>
       </View>
     </TouchableOpacity>
   );

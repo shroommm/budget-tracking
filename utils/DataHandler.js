@@ -94,6 +94,71 @@ export const addMoneyUse = (moneyUse) => {
   SyncStorage.set("accounts", accounts);
   SyncStorage.set("moneyuses", moneyUses);
 };
+
+export const changeMoneyUse = (moneyUse) => {
+  let moneyUses = SyncStorage.get("moneyuses");
+  let oldMoneyUse = moneyUses.find(item => item.id ==moneyUse.id);
+  // console.log('old moneyuse',oldMoneyUse)
+
+
+  let accounts = getAccounts();
+  //Khoi phuc
+
+  //change money in account
+  accounts.forEach(account => {
+    if(account.id==moneyUse.accountId) {
+
+      if(moneyUse.type==="expense") {
+        account.amount+=oldMoneyUse.cost//Khoi phuc
+        account.amount-=moneyUse.cost
+      }
+      else {
+        account.amount-=oldMoneyUse.cost//Khoi phuc
+        account.amount+=moneyUse.cost
+      }
+     
+    }
+  })
+  
+  moneyUses.forEach(item => {
+    if(item.id===moneyUse.id) {
+      for(key in item) {
+        item[key] = moneyUse[key];
+        console.log(moneyUse[key])
+      }
+    }
+  });
+
+  SyncStorage.set("accounts", accounts);
+  SyncStorage.set("moneyuses", moneyUses);
+};
+
+export const deleteMoneyUse = (moneyUseId) => {
+
+  let moneyUses = SyncStorage.get("moneyuses");
+  let moneyUse = moneyUses.find(e => e.id === moneyUseId);
+
+  console.log(moneyUse)
+  moneyUses.forEach((e,i) => {
+    if(e.id ===moneyUseId) {
+      moneyUses.splice(i,1);
+    }
+  })
+
+  accounts.forEach(acc => {
+    if(acc.id === moneyUse.accountId) {
+      if(moneyUse.type==='expense') {
+        console.log("vao day")
+        acc.amount+=moneyUse.cost;
+      } else {
+        acc.amount-=moneyUse.cost;
+      }
+    }
+  })
+  console.log('accounts',accounts)
+  SyncStorage.set("moneyuses",moneyUses);
+  SyncStorage.set("accounts",accounts);
+}
 //Data with async storage
 
 // const storeData = async (key, value) => {

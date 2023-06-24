@@ -2,6 +2,7 @@
   {
     "id": "1686665301",
     "category": "Grocery shopping",
+    "categoryId": "1233",
     "date": "Fri Jun 23 2023 10:55:05 GMT+0700",
     "cost": 30000,
     "type": "expense",
@@ -11,6 +12,7 @@
   {
     "id": "1686665302",
     "category": "Grocery shopping",
+    "categoryId": "1233",
     "date": "Fri Jun 23 2023 10:55:05 GMT+0700",
     "cost": 30000,
     "type": "expense",
@@ -20,6 +22,7 @@
   {
     "id": "1686665303",
     "category": "Grocery shopping",
+    "categoryId": "1233",
     "date": "Fri Jun 23 2023 10:55:05 GMT+0700",
     "cost": 30000,
     "type": "expense",
@@ -29,6 +32,7 @@
   {
     "id": "1686665304",
     "category": "Grocery shopping",
+    "categoryId": "1233",
     "date": "Fri Jun 23 2023 10:55:05 GMT+0700",
     "cost": 30000,
     "type": "expense",
@@ -38,6 +42,7 @@
   {
     "id": "1686665305",
     "category": "Grocery shopping",
+    "categoryId": "1233",
     "date": "Fri Jun 23 2023 10:55:05 GMT+0700",
     "cost": 30000,
     "type": "expense",
