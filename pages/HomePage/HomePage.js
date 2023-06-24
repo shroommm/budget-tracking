@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 
 import {
   View,
@@ -28,14 +29,51 @@ const HomePage = ({ navigation, route }) => {
   const forceRender = () => {
     setRefreshKey((prevKey) => prevKey + 1);
   };
-
   if (route.params?.shouldRender) {
     forceRender();
     route.params.shouldRender = false;
   }
   //Force render page end
+
   let accounts = getAccounts();
-  console.log(accounts);
+  // useEffect(() => {
+  //   accounts = getAccounts();
+
+  //   accounts = accounts.map((account) => {
+  //     return {
+  //       id: account.id,
+  //       label: account.name,
+  //       value: account.id,
+  //       amount: account.amount,
+  //     };
+  //   });
+  //   setAccount(accounts[0]);
+  //   setAccountsItems(accounts)
+  // },[accounts])
+  useFocusEffect(
+    useCallback(() => {
+      // Do something when the screen is focused
+      console.log("screen is focused");
+      accounts = getAccounts();
+      accounts = accounts.map((account) => {
+        return {
+          id: account.id,
+          label: account.name,
+          value: account.id,
+          amount: account.amount,
+        };
+      });
+      setAccount(accounts.length > 0 ? accounts[0] : null);
+      setAccountsItems(accounts);
+
+      return () => {
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+        console.log("screen are not focused");
+      };
+    }, [])
+  );
+
   accounts = accounts.map((account) => {
     return {
       id: account.id,
@@ -55,8 +93,8 @@ const HomePage = ({ navigation, route }) => {
   let [isExpenseView, setIsExpenseView] = useState(true);
   let expenses = getExpenses();
   let incomes = getIncomes();
-  expenses = expenses.filter((expense) => expense.accountId == account.id);
-  incomes = incomes.filter((expense) => expense.accountId == account.id);
+  expenses = expenses.filter((expense) => expense.accountId == account?.id);
+  incomes = incomes.filter((expense) => expense.accountId == account?.id);
   const expensesSum = expenses.reduce(
     (accumulator, item) => accumulator + item.cost,
     0
@@ -67,14 +105,29 @@ const HomePage = ({ navigation, route }) => {
   );
   const getAmountOfAccount = (id) => {
     let accounts = getAccounts();
-    let account = accounts.find((account) => account.id === id);
-    return account.amount;
+    let account = accounts.find((account) => account?.id === id);
+    return account ? account.amount : 0;
   };
 
   const handleSelectAccountItem = (account) => {
     setAccount(account);
   };
 
+  if (!account) {
+    return (
+      <SafeAreaView style={{ flex: 1, paddingTop: 40, paddingBottom: 60 }}>
+        <Text style={{fontSize:40,textAlign:"center"}}>See you again!</Text>
+        <BottomMenu
+          menuOnPress={() => {
+            navigation.navigate("Menu", {
+              setAccountHomePage: setAccount,
+            });
+          }}
+  
+        />
+      </SafeAreaView>
+    );
+  }
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 40, paddingBottom: 60 }}>
       <StatusBar animated={true} backgroundColor="#61dafb" />
@@ -179,7 +232,9 @@ const HomePage = ({ navigation, route }) => {
       </View>
       <BottomMenu
         menuOnPress={() => {
-          navigation.navigate("Menu");
+          navigation.navigate("Menu", {
+            setAccountHomePage: setAccount,
+          });
         }}
         addItemOnPress={() => {
           navigation.navigate("AddMoney");

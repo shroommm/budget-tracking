@@ -6,16 +6,17 @@ import {
   SafeAreaView,
   StyleSheet,
   TouchableOpacity,
-  TouchableHighlight,
 } from "react-native";
 
-const MenuPage = ({ navigation }) => {
+const MenuPage = ({ navigation, route }) => {
+  // let setAccountHomePage = route.params?.setAccountHomePage;
+
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.textWrapper}
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.navigate("Home", { shouldRender: true })}
         >
           <Text style={styles.text}>Home</Text>
         </TouchableOpacity>

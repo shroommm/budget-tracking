@@ -17,12 +17,15 @@ import EditTransferPage from "../pages/EditTransferPage/EditTransferPage";
 import EditPaymentMethodPage from "../pages/EditPaymentMethodPage/EditPaymentMethodPage";
 
 import { useEffect } from "react";
-import { initializeSampleDataSetSyncStorage } from "../utils/DataHandler";
+import {
+  getAccounts,
+  initializeSampleDataSetSyncStorage,
+} from "../utils/DataHandler";
 import { useState } from "react";
 import { useCallback } from "react";
-import { LogBox } from 'react-native';
+import { LogBox } from "react-native";
 
-LogBox.ignoreAllLogs();//Ignore all log notifications
+LogBox.ignoreAllLogs(); //Ignore all log notifications
 const Stack = createNativeStackNavigator();
 
 initializeSampleDataSetSyncStorage();
@@ -30,7 +33,11 @@ initializeSampleDataSetSyncStorage();
 const Home = () => {
   // Force update component
   const [count, setCount] = useState(0);
+  const [key, setKey] = useState(0);
 
+  const remountScreen = () => {
+    setKey((prevKey) => prevKey + 1);
+  };
   const forceUpdate = () => {
 
     setCount(count + 1); // Increment the count to trigger a re-render
@@ -38,7 +45,7 @@ const Home = () => {
 
   const setOption = {
     headerShown: false,
-    forceUpdate:forceUpdate
+    forceUpdate: forceUpdate,
   };
 
   return (
@@ -47,7 +54,7 @@ const Home = () => {
       screenOptions={{ headerShown: false, headerTitle: "" }}
     >
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomePage} options={setOption} />
+        <Stack.Screen name="Home" component={HomePage} options={{...setOption}} />
         <Stack.Screen name="Menu" component={MenuPage} options={setOption} />
         <Stack.Screen
           name="AddMoney"
@@ -58,7 +65,6 @@ const Home = () => {
           name="Categories"
           component={CategoriesPage}
           options={setOption}
-    
         />
         <Stack.Screen
           name="Account"
@@ -99,6 +105,7 @@ const Home = () => {
           name="EditPaymentMethod"
           component={EditPaymentMethodPage}
           options={setOption}
+
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -13,7 +13,10 @@ import { MenuBtn, InputAccount } from "../../components";
 
 import left_icon from "../../asset/icons/left.png";
 
-const EditPaymentMethodPage = ({ navigation }) => {
+const EditPaymentMethodPage = ({ navigation, route }) => {
+
+  let { editAccount, setFirstAccount } = route.params;
+  console.log(setFirstAccount);
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
       <View style={styles.container}>
@@ -33,7 +36,9 @@ const EditPaymentMethodPage = ({ navigation }) => {
         addBtnOnPress={() => {
           navigation.navigate("Account", { shouldRender: true });
         }}
-        btnName={'Confirm'}
+        btnName={"Confirm"}
+        isEdit={true}
+        editAccount={editAccount}
       />
     </SafeAreaView>
   );

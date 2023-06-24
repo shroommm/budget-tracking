@@ -5,7 +5,7 @@ import styles from './accountDetail.style'
 import { getAccounts } from "../../utils/DataHandler.js";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const AccountDetail = ({style}) => {
+const AccountDetail = ({style,navigation}) => {
     let accounts = getAccounts();
     const data = accounts;
     const isLoading = false;
@@ -15,7 +15,7 @@ const AccountDetail = ({style}) => {
             <FlatList
                 data={data}
                 renderItem={({ item }) => (
-                    <Account item={item} />
+                    <Account item={item} navigation={navigation}/>
                 )}
                 showsVerticalScrollIndicator={false}    
             />
