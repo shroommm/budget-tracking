@@ -6,6 +6,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-community/art": "^1.2.0",
     "@react-native-community/datetimepicker": "6.7.3",
     "@rneui/base": "^4.0.0-rc.7",
     "@rneui/themed": "^4.0.0-rc.7",
@@ -21,6 +22,7 @@
     "react-native-elements": "^3.4.3",
     "react-native-gesture-handler": "~2.9.0",
     "react-native-modal-datetime-picker": "^15.0.1",
+    "react-native-neomorph-shadows": "^0.0.8",
     "react-native-reanimated": "~2.14.4",
     "react-native-safe-area-context": "4.5.0",
     "react-native-screens": "~3.20.0",

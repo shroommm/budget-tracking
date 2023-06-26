@@ -3,7 +3,15 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 
 export function ExpenseItem({ item }) {
   return (
-    <TouchableOpacity style={styles.root}>
+    <TouchableOpacity
+      style={{
+        ...styles.root,
+        borderStyle: "solid",
+        borderColor: "#828282",
+        borderWidth: 0.3,
+        borderRadius: 10,
+      }}
+    >
       <View style={styles.info}>
         <Text style={styles.groceryShopping}>{item.category}</Text>
         <Text style={styles.$22July$2021}>{item.date}</Text>
@@ -25,10 +33,10 @@ const styles = StyleSheet.create({
   root: {
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor:"white",
-    marginBottom:10,
-    padding:10,
-    borderRadius:15
+    backgroundColor: "white",
+    marginBottom: 10,
+    padding: 10,
+    borderRadius: 15,
   },
   icon: {
     flexDirection: "column",
@@ -53,12 +61,10 @@ const styles = StyleSheet.create({
     color: "#7d8895",
   },
   $30049: {
-
     letterSpacing: 1,
     fontSize: 16,
     fontWeight: "500",
     textAlign: "right",
     color: "#ef5354",
-  
   },
 });

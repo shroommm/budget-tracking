@@ -46,12 +46,11 @@ const AddMoneyPage = ({ navigation }) => {
         <View
           style={{
             width: "100%",
-            backgroundColor: "#94C3F6",
+            // backgroundColor: "#94C3F6",
             flexDirection: "row",
             alignItems: "center",
             borderRadius: 15,
             padding: 10,
-            backgroundColor: "#94C3F6",
           }}
         >
           <TextInput
@@ -189,6 +188,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 30,
     width: "100%",
+    color: "black",
   },
   centeredView: {
     flex: 1,
@@ -201,8 +201,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
-    width:"100%",
-    height:"80%",
+    width: "100%",
+    height: "80%",
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {

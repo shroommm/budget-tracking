@@ -36,43 +36,54 @@ const HomePage = ({ navigation }) => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
+    <SafeAreaView
+      style={{ flex: 1, paddingTop: 25, backgroundColor: "#FAFAFA" }}
+    >
       <StatusBar animated={true} backgroundColor="#61dafb" />
-      <Text style={{ textAlign: "center" }}>Home</Text>
+      <Text style={{ textAlign: "center", marginVertical: 20 }}>Home</Text>
+
       <View
         style={{
           ...styles.root,
           overflow: "hidden",
           shadowColor: "rgba(0, 0, 0, 0.67)",
-          shadowOffset: { width: 10, height: 40 },
-          shadowOpacity: 1,
-          shadowRadius: 12,
+          shadowOffset: { width: 5, height: 5 },
+          shadowOpacity: 0.5,
+          shadowRadius: 15,
           elevation: 7,
           marginHorizontal: 10,
-          paddingTop: 10,
+          paddingTop: 30,
+          marginTop: 15,
+          height: 203,
+          flexShrink: 0,
+          borderStyle: "solid",
+          borderColor: "#828282",
+          borderWidth: 0.3,
         }}
       >
-        <Text style={styles.expense}>
+        <Text style={styles.expenseHeader}>
           {isExpenseView ? "Expense" : "Income"}
         </Text>
         <Text
           style={{
             ...styles.$5000000,
             paddingBottom: 28,
-            paddingTop: 22,
-            color: isExpenseView ? "#ef5354" : "green",
+            paddingTop: 20,
+            marginBottom: 2,
+            fontSize: 40,
+            color: isExpenseView ? "#f05a4d" : "#209639",
           }}
         >
           {(isExpenseView
             ? "-" + expensesSum.toLocaleString()
             : "+" + incomesSum.toLocaleString()) + " VND"}
         </Text>
-        <View style={{ flexDirection: "row", justifyContent: "center" }}>
+        <View style={styles.expenseButton}>
           <TouchableOpacity
             style={{
               ...styles.group$79,
               width: "50%",
-              backgroundColor: "#EF5354",
+              backgroundColor: "#ffe3e0",
             }}
             onPress={() => {
               setIsExpenseView(true);
@@ -84,7 +95,7 @@ const HomePage = ({ navigation }) => {
             style={{
               ...styles.group$80,
               width: "50%",
-              backgroundColor: "#A9F4A7",
+              backgroundColor: "#d9ffdb",
             }}
             onPress={() => {
               setIsExpenseView(false);
@@ -94,16 +105,21 @@ const HomePage = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
+      <View style={{ marginVertical: 20, marginLeft: 20 }}>
+        <Text>Categories</Text>
+      </View>
 
       <View style={{ paddingHorizontal: 20 }}>
-        <Text>Categories</Text>
-        <View>
-          <FlatList
-            data={isExpenseView ? expenses : incomes}
-            renderItem={({ item }) => <ExpenseItem item={item} />}
-            keyExtractor={(item) => item?.cost}
-          />
-        </View>
+        <FlatList
+          style={{
+            height: 1000,
+            flexGrow: 0,
+            backgroundColor: "#FAFAFA",
+          }}
+          data={isExpenseView ? expenses : incomes}
+          renderItem={({ item }) => <ExpenseItem item={item} />}
+          keyExtractor={(item) => item?.cost}
+        />
       </View>
       {/* <Button
         title="Go to Jane's profile"
@@ -117,9 +133,8 @@ const HomePage = ({ navigation }) => {
           navigation.navigate("Menu");
         }}
         addItemOnPress={() => {
-          navigation.navigate("AddMoney")
+          navigation.navigate("AddMoney");
         }}
-
       />
     </SafeAreaView>
   );
@@ -131,7 +146,7 @@ const styles = StyleSheet.create({
   root: {
     flexDirection: "column",
     borderRadius: 34,
-    backgroundColor: "#94C3F6",
+    backgroundColor: "#b4dcfa",
   },
   expense: {
     letterSpacing: 1,
@@ -139,8 +154,31 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     textAlign: "center",
     textAlignVertical: "top",
-    color: "#313131",
+    fontWeight: "bold",
+    color: "#4f4f4f",
   },
+  expenseHeader: {
+    letterSpacing: 1,
+    fontSize: 18,
+    fontWeight: "400",
+    textAlign: "center",
+    textAlignVertical: "top",
+    color: "#545454",
+  },
+  expenseButton: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  income: {
+    letterSpacing: 1,
+    fontSize: 18,
+    fontWeight: "400",
+    textAlign: "center",
+    textAlignVertical: "top",
+    color: "#4f4f4f",
+    fontWeight: "bold",
+  },
+
   $5000000: {
     letterSpacing: 1,
     fontSize: 35,
@@ -156,16 +194,9 @@ const styles = StyleSheet.create({
   group$80: {
     flexDirection: "column",
     paddingVertical: 10,
+    height: 100,
   },
   group$76: {
     flexDirection: "column",
-  },
-  income: {
-    letterSpacing: 1,
-    fontSize: 18,
-    fontWeight: "400",
-    textAlign: "center",
-    textAlignVertical: "top",
-    color: "#313131",
   },
 });
