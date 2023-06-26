@@ -37,7 +37,11 @@ const HomePage = ({ navigation }) => {
 
   return (
     <SafeAreaView
-      style={{ flex: 1, paddingTop: 25, backgroundColor: "#FAFAFA" }}
+      style={{
+        flex: 1,
+        paddingTop: 25,
+        backgroundColor: isExpenseView ? "#f7e9e9" : "#e9f7e9",
+      }}
     >
       <StatusBar animated={true} backgroundColor="#61dafb" />
       <Text style={{ textAlign: "center", marginVertical: 20 }}>Home</Text>
@@ -58,7 +62,7 @@ const HomePage = ({ navigation }) => {
           flexShrink: 0,
           borderStyle: "solid",
           borderColor: "#828282",
-          borderWidth: 0.3,
+          borderWidth: 1,
         }}
       >
         <Text style={styles.expenseHeader}>
@@ -71,19 +75,22 @@ const HomePage = ({ navigation }) => {
             paddingTop: 20,
             marginBottom: 2,
             fontSize: 40,
-            color: isExpenseView ? "#f05a4d" : "#209639",
+            color: isExpenseView ? "#eb3f3f" : "#209639",
           }}
         >
           {(isExpenseView
             ? "-" + expensesSum.toLocaleString()
             : "+" + incomesSum.toLocaleString()) + " VND"}
         </Text>
+
         <View style={styles.expenseButton}>
           <TouchableOpacity
             style={{
               ...styles.group$79,
               width: "50%",
               backgroundColor: "#ffe3e0",
+              borderTopColor: isExpenseView ? "red" : "",
+              borderTopWidth: isExpenseView ? 5 : 0,
             }}
             onPress={() => {
               setIsExpenseView(true);
@@ -96,6 +103,8 @@ const HomePage = ({ navigation }) => {
               ...styles.group$80,
               width: "50%",
               backgroundColor: "#d9ffdb",
+              borderTopColor: isExpenseView ? "" : "green",
+              borderTopWidth: isExpenseView ? 0 : 5,
             }}
             onPress={() => {
               setIsExpenseView(false);
@@ -105,16 +114,13 @@ const HomePage = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={{ marginVertical: 20, marginLeft: 20 }}>
-        <Text>Categories</Text>
-      </View>
 
-      <View style={{ paddingHorizontal: 20 }}>
+      <View style={{ paddingHorizontal: 20, marginTop: 30 }}>
         <FlatList
           style={{
             height: 1000,
             flexGrow: 0,
-            backgroundColor: "#FAFAFA",
+            backgroundColor: isExpenseView ? "#f7e9e9" : "#e9f7e9",
           }}
           data={isExpenseView ? expenses : incomes}
           renderItem={({ item }) => <ExpenseItem item={item} />}
@@ -146,7 +152,7 @@ const styles = StyleSheet.create({
   root: {
     flexDirection: "column",
     borderRadius: 34,
-    backgroundColor: "#b4dcfa",
+    backgroundColor: "#ffffff",
   },
   expense: {
     letterSpacing: 1,
@@ -195,6 +201,8 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     paddingVertical: 10,
     height: 100,
+    borderTopColor: "green",
+    borderTopWidth: 5,
   },
   group$76: {
     flexDirection: "column",

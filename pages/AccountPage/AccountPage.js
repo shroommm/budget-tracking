@@ -8,7 +8,12 @@ import {
   TouchableOpacity,
   TouchableHighlight,
 } from "react-native";
-import { BottomMenu, AccountTotal, AccountDetail } from "../../components";
+import {
+  BottomMenu,
+  AccountTotal,
+  AccountDetail,
+  BottomBack,
+} from "../../components";
 
 const AccountPage = ({ navigation }) => {
   return (
@@ -17,16 +22,17 @@ const AccountPage = ({ navigation }) => {
         <Text>Account Page</Text>
       </View>
 
-      <AccountTotal/>
-
-      <AccountDetail/>
-
-      <BottomMenu
-        menuOnPress={() => {
-          navigation.navigate("Menu");
+      <AccountTotal
+        addPress={() => {
+          navigation.navigate("AddPaymentMethod");
         }}
-        addItemOnPress={() => {
-          navigation.navigate("AddPaymentMethod")
+      />
+
+      <AccountDetail />
+
+      <BottomBack
+        menuOnPress={() => {
+          navigation.navigate("Home");
         }}
       />
     </SafeAreaView>

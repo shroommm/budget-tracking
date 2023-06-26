@@ -6,8 +6,10 @@ import styles from './accountTotal.style'
 
 import history_icon from '../../asset/icons/history.png' //author: Tempo_doloe (flaticon)
 import transfer_icon from '../../asset/icons/transfer.png' //author: Uniconlabs (flaticon)
+import add_icon from '../../asset/icons/plus.png' //author: Pixel Perfect (flaticon)
 
-const AccountTotal = () => {
+
+const AccountTotal = ({addPress}) => {
     return (
         <View style={styles.container}>
             <View style={styles.totalContainer}>
@@ -22,6 +24,10 @@ const AccountTotal = () => {
                 <View style={styles.btnContainer}>
                     <AccountBtn iconUrl={transfer_icon} dimension='90%' handlePress={null}/>
                     <Text style={styles.btnContext}>New transfer</Text>
+                </View>
+                <View style={styles.btnContainer}>
+                    <AccountBtn iconUrl={add_icon} dimension='90%' handlePress={addPress}/>
+                    <Text style={styles.btnContext}>New payment method</Text>
                 </View>
             </View>
         </View>

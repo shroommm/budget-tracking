@@ -6,10 +6,10 @@ export function ExpenseItem({ item }) {
     <TouchableOpacity
       style={{
         ...styles.root,
-        borderStyle: "solid",
-        borderColor: "#828282",
-        borderWidth: 0.3,
-        borderRadius: 10,
+        // borderStyle: "solid",
+        // borderColor: "#828282",
+        // borderWidth: 5,
+        // borderRadius: 10,
       }}
     >
       <View style={styles.info}>
@@ -19,7 +19,7 @@ export function ExpenseItem({ item }) {
       <Text
         style={{
           ...styles.$30049,
-          color: item.type === "expense" ? "#ef5354" : "green",
+          color: item.type === "expense" ? "#f22727" : "green",
         }}
         numberOfLines={1}
       >{`${item.cost.toLocaleString()} VND`}</Text>
@@ -65,6 +65,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "500",
     textAlign: "right",
-    color: "#ef5354",
   },
 });

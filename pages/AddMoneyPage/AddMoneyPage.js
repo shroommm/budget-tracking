@@ -104,8 +104,8 @@ const AddMoneyPage = ({ navigation }) => {
 
         <View
           style={{
-            flexDirection: "row",
             alignItems: "center",
+            flexDirection: "row",
             marginTop: 20,
             gap: 30,
           }}
@@ -114,7 +114,7 @@ const AddMoneyPage = ({ navigation }) => {
             <Text>Today 06/14</Text>
           </View>
 
-          <View>
+          <View style={{ borderWidth: 1, backgroundColor: "black" }}>
             <Button title="Choose date" onPress={showDatePicker} />
 
             <DateTimePickerModal
@@ -126,7 +126,7 @@ const AddMoneyPage = ({ navigation }) => {
           </View>
         </View>
 
-        <View>
+        <View style={{ marginTop: 20 }}>
           <Modal
             animationType="slide"
             transparent={true}
@@ -179,6 +179,7 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
     width: "90%",
+    paddingTop: 100,
   },
   input: {
     borderWidth: 1,

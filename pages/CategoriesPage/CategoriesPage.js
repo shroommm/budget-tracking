@@ -8,20 +8,19 @@ import {
   TouchableOpacity,
   TouchableHighlight,
 } from "react-native";
-import { BottomMenu } from "../../components";
+import { BottomBack, BottomMenu } from "../../components";
 
 const CategoriesPage = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
       <View style={styles.container}>
-        <Text>CategoriesPage</Text>
+        <Text>Categories Page</Text>
       </View>
 
-      <BottomMenu
+      <BottomBack
         menuOnPress={() => {
-          navigation.navigate("Menu");
+          navigation.navigate("Home");
         }}
-        addItemOnPress={null}
       />
     </SafeAreaView>
   );
