@@ -56,7 +56,7 @@ export const processTransferMoney = (transfer) => {
       account.amount += transfer.amount;
     }
   });
-  console.log(accounts)
+  console.log(accounts);
   SyncStorage.set("accounts", accounts);
 };
 
@@ -65,7 +65,6 @@ export const addNewTransfer = (transfer) => {
 
   transfers.push(transfer);
   SyncStorage.set("transfers", transfers);
-
 };
 
 export const addAccount = (moneySource) => {
@@ -78,17 +77,16 @@ export const addAccount = (moneySource) => {
 export const addMoneyUse = (moneyUse) => {
   let moneyUses = SyncStorage.get("moneyuses");
   let accounts = getAccounts();
-  accounts.forEach(account => {
-    if(account.id==moneyUse.accountId) {
-      console.log("vao day")
-      if(moneyUse.type==="expense") {
-        account.amount-=moneyUse.cost
-      }
-      else {
-        account.amount+=moneyUse.cost
+  accounts.forEach((account) => {
+    if (account.id == moneyUse.accountId) {
+      console.log("vao day");
+      if (moneyUse.type === "expense") {
+        account.amount -= moneyUse.cost;
+      } else {
+        account.amount += moneyUse.cost;
       }
     }
-  })
+  });
   moneyUses.push(moneyUse);
 
   SyncStorage.set("accounts", accounts);
@@ -97,37 +95,33 @@ export const addMoneyUse = (moneyUse) => {
 
 export const changeMoneyUse = (moneyUse) => {
   let moneyUses = SyncStorage.get("moneyuses");
-  let oldMoneyUse = moneyUses.find(item => item.id ==moneyUse.id);
+  let oldMoneyUse = moneyUses.find((item) => item.id == moneyUse.id);
   // console.log('old moneyuse',oldMoneyUse)
-
 
   let accounts = getAccounts();
   //Khoi phuc
 
   //change money in account
-  accounts.forEach(account => {
-    if(account.id==moneyUse.accountId) {
-      if(oldMoneyUse.type==="expense") {
-        account.amount+=oldMoneyUse.cost//Khoi phuc
+  accounts.forEach((account) => {
+    if (account.id == moneyUse.accountId) {
+      if (oldMoneyUse.type === "expense") {
+        account.amount += oldMoneyUse.cost; //Khoi phuc
+      } else if (oldMoneyUse.type === "income") {
+        account.amount -= oldMoneyUse.cost; //Khoi phuc
       }
-      else if (oldMoneyUse.type==="income"){
-        account.amount-=oldMoneyUse.cost//Khoi phuc
+      if (moneyUse.type === "expense") {
+        account.amount -= moneyUse.cost;
+      } else if (moneyUse.type === "income") {
+        account.amount += moneyUse.cost;
       }
-      if(moneyUse.type==="expense") {
-        account.amount-=moneyUse.cost
-      }
-      else if (moneyUse.type==="income"){
-        account.amount+=moneyUse.cost
-      }
-     
     }
-  })
-  
-  moneyUses.forEach(item => {
-    if(item.id===moneyUse.id) {
-      for(key in item) {
+  });
+
+  moneyUses.forEach((item) => {
+    if (item.id === moneyUse.id) {
+      for (key in item) {
         item[key] = moneyUse[key];
-        console.log(moneyUse[key])
+        console.log(moneyUse[key]);
       }
     }
   });
@@ -138,58 +132,57 @@ export const changeMoneyUse = (moneyUse) => {
 
 export const changeAccount = (account) => {
   let accounts = getAccounts();
-  console.log('acccccc',account)
-  let oldAccount= accounts.find(acc => account.id === acc.id);
+  console.log("acccccc", account);
+  let oldAccount = accounts.find((acc) => account.id === acc.id);
 
   for (key in oldAccount) {
-    oldAccount[key]=account[key];
-    console.log('key',key)
+    oldAccount[key] = account[key];
+    console.log("key", key);
   }
 
-
   SyncStorage.set("accounts", accounts);
-}
+};
 
 export const deleteAccount = (accountId) => {
-
   let moneyUses = SyncStorage.get("moneyuses");
-  let moneyUsesAfterDeleted = moneyUses.filter((obj) => obj.accountId !== accountId)
+  let moneyUsesAfterDeleted = moneyUses.filter(
+    (obj) => obj.accountId !== accountId
+  );
   let accounts = getAccounts();
-  accounts.forEach((acc,i) => {
-    if(acc.id ===accountId) {
-      accounts.splice(i,1);
+  accounts.forEach((acc, i) => {
+    if (acc.id === accountId) {
+      accounts.splice(i, 1);
     }
-  })
-  
+  });
+
   SyncStorage.set("accounts", accounts);
   SyncStorage.set("moneyuses", moneyUses);
-}
+};
 export const deleteMoneyUse = (moneyUseId) => {
-
   let moneyUses = SyncStorage.get("moneyuses");
-  let moneyUse = moneyUses.find(e => e.id === moneyUseId);
+  let moneyUse = moneyUses.find((e) => e.id === moneyUseId);
 
-  console.log(moneyUse)
-  moneyUses.forEach((e,i) => {
-    if(e.id ===moneyUseId) {
-      moneyUses.splice(i,1);
+  console.log(moneyUse);
+  moneyUses.forEach((e, i) => {
+    if (e.id === moneyUseId) {
+      moneyUses.splice(i, 1);
     }
-  })
+  });
 
-  accounts.forEach(acc => {
-    if(acc.id === moneyUse.accountId) {
-      if(moneyUse.type==='expense') {
-        console.log("vao day")
-        acc.amount+=moneyUse.cost;
+  accounts.forEach((acc) => {
+    if (acc.id === moneyUse.accountId) {
+      if (moneyUse.type === "expense") {
+        console.log("vao day");
+        acc.amount += moneyUse.cost;
       } else {
-        acc.amount-=moneyUse.cost;
+        acc.amount -= moneyUse.cost;
       }
     }
-  })
-  console.log('accounts',accounts)
-  SyncStorage.set("moneyuses",moneyUses);
-  SyncStorage.set("accounts",accounts);
-}
+  });
+  console.log("accounts", accounts);
+  SyncStorage.set("moneyuses", moneyUses);
+  SyncStorage.set("accounts", accounts);
+};
 //Data with async storage
 
 // const storeData = async (key, value) => {

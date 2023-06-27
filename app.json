@@ -6,7 +6,9 @@
     },
     "name": "Budget-Tracking",
     "slug": "Budget-Tracking",
-    "userInterfaceStyle": "automatic"
-
+    "userInterfaceStyle": "automatic",
+    "android": {
+      "package": "com.anonymous.BudgetTracking"
+    }
   }
 }

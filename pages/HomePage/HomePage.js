@@ -116,14 +116,15 @@ const HomePage = ({ navigation, route }) => {
   if (!account) {
     return (
       <SafeAreaView style={{ flex: 1, paddingTop: 40, paddingBottom: 60 }}>
-        <Text style={{fontSize:40,textAlign:"center"}}>See you again!</Text>
+        <Text style={{ fontSize: 40, textAlign: "center" }}>
+          See you again!
+        </Text>
         <BottomMenu
           menuOnPress={() => {
             navigation.navigate("Menu", {
               setAccountHomePage: setAccount,
             });
           }}
-  
         />
       </SafeAreaView>
     );
