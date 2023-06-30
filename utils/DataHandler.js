@@ -1,8 +1,7 @@
 import moneyUses from "../data/moneyuses.json";
 import categories from "../data/categories.json";
 import accounts from "../data/accounts.json";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-// import {AsyncStorage} from 'react-native';
+
 import SyncStorage from "sync-storage";
 
 export const getExpenses = () => {
