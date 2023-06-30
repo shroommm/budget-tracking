@@ -22,6 +22,7 @@ import {
   getIncomeCategories,
 } from "../../utils/DataHandler";
 import { convertDateInAddMoney } from "../../utils/DateConverter";
+import { showNotification } from "../../utils/ScreenHandler";
 
 const AddMoneyPage = ({ navigation }) => {
   //getData
@@ -100,7 +101,7 @@ const AddMoneyPage = ({ navigation }) => {
   const handleAddMoneyUse = () => {
     console.log(inputValue);
 
-    if (inputValue === '' || accountValue === null || accountValue === null)
+    if (inputValue === "" || accountValue === null || accountValue === null)
       return;
 
     let moneyUse = {
@@ -115,6 +116,10 @@ const AddMoneyPage = ({ navigation }) => {
     };
 
     addMoneyUse(moneyUse);
+    showNotification(
+      "Add money successfully!",
+      `Account: ${moneyUse.account}\nCategory:${moneyUse.category}\nAmount:${moneyUse.cost.toLocaleString()}`
+    );
   };
 
   return (

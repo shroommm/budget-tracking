@@ -48,5 +48,25 @@
     "type": "expense",
     "accountId": "123456",
     "account": "Cash"
+  },
+  {
+    "id": "1686665306",
+    "category": "Grocery shopping",
+    "categoryId": "1233",
+    "date": "Fri Jun 23 2023 10:55:05 GMT+0700",
+    "cost": 30000,
+    "type": "expense",
+    "accountId": "123456",
+    "account": "Cash"
+  },
+  {
+    "id": "1686665307",
+    "category": "Grocery shopping",
+    "categoryId": "1233",
+    "date": "Fri Jun 23 2023 10:55:05 GMT+0700",
+    "cost": 30000,
+    "type": "expense",
+    "accountId": "123456",
+    "account": "Cash"
   }
 ]

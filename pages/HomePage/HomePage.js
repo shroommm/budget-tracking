@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   StatusBar,
+  Alert
 } from "react-native";
 
 import ExpenseItem from "../../components/ExpenseItem/ExpenseItem";
@@ -116,20 +117,28 @@ const HomePage = ({ navigation, route }) => {
   if (!account) {
     return (
       <SafeAreaView style={{ flex: 1, paddingTop: 40, paddingBottom: 60 }}>
-        <Text style={{fontSize:40,textAlign:"center"}}>See you again!</Text>
+        <Text style={{ fontSize: 40, textAlign: "center" }}>
+          See you again!
+        </Text>
         <BottomMenu
           menuOnPress={() => {
             navigation.navigate("Menu", {
               setAccountHomePage: setAccount,
             });
           }}
-  
         />
       </SafeAreaView>
     );
   }
   return (
-    <SafeAreaView style={{ flex: 1, paddingTop: 40, paddingBottom: 60 }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        paddingTop: 40,
+        paddingBottom: 60,
+        backgroundColor: isExpenseView ? "#f7e9e9" : "#e9f7e9",
+      }}
+    >
       <StatusBar animated={true} backgroundColor="#61dafb" />
       {/* <Text style={{ textAlign: "center" }}>Home</Text> */}
       <View style={{ paddingHorizontal: 20, zIndex: 30 }}>
@@ -167,35 +176,45 @@ const HomePage = ({ navigation, route }) => {
           ...styles.root,
           overflow: "hidden",
           shadowColor: "rgba(0, 0, 0, 0.67)",
-          shadowOffset: { width: 10, height: 40 },
-          shadowOpacity: 1,
-          shadowRadius: 12,
+          shadowOffset: { width: 5, height: 5 },
+          shadowOpacity: 0.5,
+          shadowRadius: 15,
           elevation: 7,
           marginHorizontal: 10,
-          paddingTop: 10,
+          paddingTop: 30,
+          marginTop: 15,
+          height: 203,
+          flexShrink: 0,
+          borderStyle: "solid",
+          borderColor: "#828282",
+          borderWidth: 1,
         }}
       >
-        <Text style={styles.expense}>
+        <Text style={styles.expenseHeader}>
           {isExpenseView ? "Expense" : "Income"}
         </Text>
         <Text
           style={{
             ...styles.$5000000,
             paddingBottom: 28,
-            paddingTop: 10,
-            color: isExpenseView ? "#ef5354" : "green",
+            paddingTop: 20,
+            marginBottom: 2,
+            fontSize: 40,
+            color: isExpenseView ? "#eb3f3f" : "#209639",
           }}
         >
           {(isExpenseView
             ? "-" + expensesSum.toLocaleString()
             : "+" + incomesSum.toLocaleString()) + " VND"}
         </Text>
-        <View style={{ flexDirection: "row", justifyContent: "center" }}>
+        <View style={styles.expenseButton}>
           <TouchableOpacity
             style={{
               ...styles.group$79,
               width: "50%",
-              backgroundColor: "#EF5354",
+              backgroundColor: "#ffe3e0",
+              borderTopColor: isExpenseView ? "red" : "",
+              borderTopWidth: isExpenseView ? 5 : 0,
             }}
             onPress={() => {
               setIsExpenseView(true);
@@ -207,7 +226,9 @@ const HomePage = ({ navigation, route }) => {
             style={{
               ...styles.group$80,
               width: "50%",
-              backgroundColor: "#A9F4A7",
+              backgroundColor: "#d9ffdb",
+              borderTopColor: isExpenseView ? "" : "green",
+              borderTopWidth: isExpenseView ? 0 : 5,
             }}
             onPress={() => {
               setIsExpenseView(false);
@@ -218,10 +239,13 @@ const HomePage = ({ navigation, route }) => {
         </View>
       </View>
 
-      <View style={{ paddingHorizontal: 20, flex: 1 }}>
-        <Text>Categories</Text>
-
+      <View style={{ paddingHorizontal: 20, marginTop: 30 ,flex:1 }}>
         <FlatList
+          style={{
+            height: 1000,
+            flexGrow: 0,
+            backgroundColor: isExpenseView ? "#f7e9e9" : "#e9f7e9",
+          }}
           data={isExpenseView ? expenses : incomes}
           renderItem={({ item }) => (
             <ExpenseItem item={item} navigation={navigation} />
@@ -250,7 +274,7 @@ const styles = StyleSheet.create({
   root: {
     flexDirection: "column",
     borderRadius: 34,
-    backgroundColor: "#94C3F6",
+    backgroundColor: "#ffffff",
   },
   expense: {
     letterSpacing: 1,
@@ -258,7 +282,20 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     textAlign: "center",
     textAlignVertical: "top",
-    color: "#313131",
+    fontWeight: "bold",
+    color: "#4f4f4f",
+  },
+  expenseHeader: {
+    letterSpacing: 1,
+    fontSize: 18,
+    fontWeight: "400",
+    textAlign: "center",
+    textAlignVertical: "top",
+    color: "#545454",
+  },
+  expenseButton: {
+    flexDirection: "row",
+    justifyContent: "center",
   },
   $5000000: {
     letterSpacing: 1,
