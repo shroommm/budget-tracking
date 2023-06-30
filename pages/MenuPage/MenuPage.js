@@ -16,7 +16,7 @@ const MenuPage = ({ navigation, route }) => {
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.textWrapper}
-          onPress={() => navigation.navigate("Home", { shouldRender: true })}
+          onPress={() => navigation.navigate("Home")}
         >
           <Text style={styles.text}>Home</Text>
         </TouchableOpacity>
@@ -46,13 +46,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    justifyContent: "center",
     gap: 15,
     paddingVertical: 30,
   },
   textWrapper: {
     backgroundColor: "#94C3F6",
     width: "85%",
-    borderRadius: 7,
+    borderRadius: 10,
+    borderWidth: 3,
+    borderColor: "#575757",
+    height: "10%",
+    justifyContent: "center",
     paddingVertical: 10,
   },
   text: {
