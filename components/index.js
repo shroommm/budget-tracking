@@ -6,14 +6,15 @@ import InputAccount from "./inputAccount/inputAccount";
 import TransferHistory from "./transfer_history/transferHistory";
 import InputTransfer from "./inputTransfer/InputTransfer";
 import InputCategory from "./inputCategory/InputCategory";
-
+import BottomBack from "./bottom_back/BottomBack";
 export {
-    BottomMenu,
-    AccountTotal,
-    AccountDetail,
-    MenuBtn,
-    InputAccount,
-    TransferHistory,
-    InputTransfer,
-    InputCategory,
+  BottomMenu,
+  BottomBack,
+  AccountTotal,
+  AccountDetail,
+  MenuBtn,
+  InputAccount,
+  TransferHistory,
+  InputTransfer,
+  InputCategory,
 };

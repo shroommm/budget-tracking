@@ -8,7 +8,12 @@ import {
   TouchableOpacity,
   TouchableHighlight,
 } from "react-native";
-import { BottomMenu, AccountTotal, AccountDetail } from "../../components";
+import {
+  BottomBack,
+  BottomMenu,
+  AccountTotal,
+  AccountDetail,
+} from "../../components";
 
 const AccountPage = ({ navigation, route }) => {
   //Force render page start
@@ -40,14 +45,19 @@ const AccountPage = ({ navigation, route }) => {
 
       <AccountDetail style={{ paddingBottom: 60 }} navigation={navigation} />
 
-      <BottomMenu
+      <BottomBack
+        menuOnPress={() => {
+          navigation.navigate("Home");
+        }}
+      />
+      {/* <BottomMenu
         menuOnPress={() => {
           navigation.navigate("Menu");
         }}
         addItemOnPress={() => {
           navigation.navigate("AddPaymentMethod");
         }}
-      />
+      /> */}
     </SafeAreaView>
   );
 };

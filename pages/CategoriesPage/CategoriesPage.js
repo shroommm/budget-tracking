@@ -11,7 +11,7 @@ import {
   Modal,
   Pressable,
 } from "react-native";
-import { BottomMenu } from "../../components";
+import { BottomMenu, BottomBack } from "../../components";
 import { getCategories } from "../../utils/DataHandler";
 import { Input } from "@rneui/base";
 import { useCallback } from "react";
@@ -20,12 +20,12 @@ const CategoriesPage = ({ navigation, route }) => {
   //Force render page start
   const [refreshKey, setRefreshKey] = useState(0);
   const forceRender = () => {
-    setRefreshKey(prevKey => prevKey + 1);
+    setRefreshKey((prevKey) => prevKey + 1);
   };
 
-  if(route.params?.shouldRender) {
+  if (route.params?.shouldRender) {
     forceRender();
-    route.params.shouldRender=false;
+    route.params.shouldRender = false;
   }
   //Force render page end
 
@@ -43,33 +43,64 @@ const CategoriesPage = ({ navigation, route }) => {
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
       <View style={styles.container}>
         <Text>Categories</Text>
-        <View style={[styles.view, { width: "100%" }]}>
+        {/* <View style={[styles.view, { width: "100%" }]}>
           <SearchBar
+            inputStyle={{ backgroundColor: "white" }}
+            containerStyle={{
+              backgroundColor: "white",
+              borderRadius: 10,
+              borderWidth: 2,
+            }}
+            inputContainerStyle={{ backgroundColor: "white" }}
+            placeholderTextColor={"#g5g5g5"}
             placeholder="Type Here..."
             onChangeText={updateSearch}
             value={search}
           />
-        </View>
-        <Text>Click to edit</Text>
-        <View style={{ flex: 1 }}>
+        </View> */}
+        {/* <Text>Click to edit</Text> */}
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+            margin: 0,
+          }}
+        >
           <FlatList
             data={categories}
             renderItem={({ item, index }) => (
-              <TouchableOpacity
+              <View
                 style={{
-                  backgroundColor: "red",
-                  width: "50%",
+                  backgroundColor: "#bfecff",
+                  width: "47  %",
+
                   height: 100,
+                  borderRadius: 10,
                   alignItems: "center",
                   justifyContent: "center",
                   margin: 5,
                 }}
-                onPress={() => setModalVisible(true)}
               >
-                <Text style={{ fontSize: 30 }}>{item.name}</Text>
-              </TouchableOpacity>
+                <Text style={{ fontSize: 25 }}>{item.name}</Text>
+              </View>
+              // <TouchableOpacity
+              //   style={{
+              //     backgroundColor: "#bfecff",
+              //     width: "47  %",
+
+              //     height: 100,
+              //     borderRadius: 10,
+              //     alignItems: "center",
+              //     justifyContent: "center",
+              //     margin: 5,
+              //   }}
+              //   onPress={() => setModalVisible(true)}
+              // >
+              //   <Text style={{ fontSize: 25 }}>{item.name}</Text>
+              // </TouchableOpacity>
             )}
-            contentContainerStyle={{ paddingHorizontal: 20 }}
+            // contentContainerStyle={{ paddingHorizontal: 20 }}
             keyExtractor={(item) => item.id}
             numColumns={2}
           />
@@ -116,12 +147,17 @@ const CategoriesPage = ({ navigation, route }) => {
         </View>
       </Modal>
 
-      <BottomMenu
+      {/* <BottomMenu
         menuOnPress={() => {
           navigation.navigate("Menu");
         }}
         addItemOnPress={() => {
           navigation.navigate("AddCategory");
+        }}
+      /> */}
+      <BottomBack
+        menuOnPress={() => {
+          navigation.navigate("Home");
         }}
       />
     </SafeAreaView>
@@ -134,11 +170,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    gap: 15,
+    justifyContent: "center",
+    gap: 10,
+    marginHorizontal: 10,
     paddingVertical: 30,
-    width: "95%",
-    marginLeft: "auto",
-    marginRight: "auto",
+    // marginLeft: "auto",
+    // marginRight: "auto",
   },
   textWrapper: {
     backgroundColor: "#94C3F6",

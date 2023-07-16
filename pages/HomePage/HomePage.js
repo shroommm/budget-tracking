@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   StatusBar,
-  Alert
+  Alert,
 } from "react-native";
 
 import ExpenseItem from "../../components/ExpenseItem/ExpenseItem";
@@ -141,8 +141,8 @@ const HomePage = ({ navigation, route }) => {
     >
       <StatusBar animated={true} backgroundColor="#61dafb" />
       {/* <Text style={{ textAlign: "center" }}>Home</Text> */}
-      <View style={{ paddingHorizontal: 20, zIndex: 30 }}>
-        <View style={[styles.inputContainer, { zIndex: 30 }]}>
+      {/* <View style={{ paddingHorizontal: 10, zIndex: 30 }}>
+        <View style={[styles.inputContainer, { zIndex: 30, marginBottom: 10 }]}>
           <Text style={styles.contextInput}>Account</Text>
           <DropDownPicker
             open={accountOpen}
@@ -169,7 +169,7 @@ const HomePage = ({ navigation, route }) => {
             {getAmountOfAccount(account.id).toLocaleString() + " VND"}
           </Text>
         </View>
-      </View>
+      </View> */}
 
       <View
         style={{
@@ -198,7 +198,7 @@ const HomePage = ({ navigation, route }) => {
             ...styles.$5000000,
             paddingBottom: 28,
             paddingTop: 20,
-            marginBottom: 2,
+            marginBottom: 5,
             fontSize: 40,
             color: isExpenseView ? "#eb3f3f" : "#209639",
           }}
@@ -239,7 +239,7 @@ const HomePage = ({ navigation, route }) => {
         </View>
       </View>
 
-      <View style={{ paddingHorizontal: 20, marginTop: 30 ,flex:1 }}>
+      <View style={{ paddingHorizontal: 20, marginTop: 30, flex: 1 }}>
         <FlatList
           style={{
             height: 1000,
@@ -307,11 +307,13 @@ const styles = StyleSheet.create({
   },
   group$79: {
     flexDirection: "column",
-    paddingVertical: 10,
+    height: 40,
+    justifyContent: "center",
   },
   group$80: {
     flexDirection: "column",
-    paddingVertical: 10,
+    height: 40,
+    justifyContent: "center",
   },
   group$76: {
     flexDirection: "column",
@@ -322,7 +324,8 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     textAlign: "center",
     textAlignVertical: "top",
-    color: "#313131",
+    color: "#4f4f4f",
+    fontWeight: "bold",
   },
   inputContainer: {
     paddingVertical: 15,

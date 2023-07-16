@@ -1,22 +1,27 @@
 [
-    {
-        "id": "123",
-        "name": "Fitness",
-        "usefor": "expense"
-    },
-    {
-        "id": "124",
-        "name": "Salary",
-        "usefor": "income"
-    },
-    {
-        "id": "125",
-        "name": "Coffee",
-        "usefor": "expense"
-    },
-    {
-        "id": "1233",
-        "name": "Grocery shopping",
-        "usefor": "expense"
-    }
+  {
+    "id": "123",
+    "name": "Food",
+    "usefor": "expense"
+  },
+  {
+    "id": "124",
+    "name": "Other",
+    "usefor": "expense"
+  },
+  {
+    "id": "124",
+    "name": "Income",
+    "usefor": "expense"
+  },
+  {
+    "id": "125",
+    "name": "Coffee",
+    "usefor": "expense"
+  },
+  {
+    "id": "1233",
+    "name": "Grocery shopping",
+    "usefor": "expense"
+  }
 ]
