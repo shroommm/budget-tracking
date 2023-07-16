@@ -74,7 +74,7 @@ const CategoriesPage = ({ navigation, route }) => {
                 style={{
                   backgroundColor: "#bfecff",
                   width: "47  %",
-
+                  backgroundColor: "#bababa",
                   height: 100,
                   borderRadius: 10,
                   alignItems: "center",

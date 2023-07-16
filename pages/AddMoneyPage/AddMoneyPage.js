@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { Input } from "@rneui/themed";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { BottomMenu, MenuBtn } from "../../components";
+import { BottomBack, MenuBtn } from "../../components";
 import DropDownPicker from "react-native-dropdown-picker";
 import left_icon from "../../asset/icons/left.png";
 import {
@@ -118,33 +118,35 @@ const AddMoneyPage = ({ navigation }) => {
     addMoneyUse(moneyUse);
     showNotification(
       "Add money successfully!",
-      `Account: ${moneyUse.account}\nCategory:${moneyUse.category}\nAmount:${moneyUse.cost.toLocaleString()}`
+      `Account: ${moneyUse.account}\nCategory:${
+        moneyUse.category
+      }\nAmount:${moneyUse.cost.toLocaleString()}`
     );
   };
 
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
       <View style={styles.containerReturnBtn}>
-        <MenuBtn
+        {/* <MenuBtn
           iconUrl={left_icon}
           dimension={"70%"}
           handlePress={() => {
             navigation.navigate("Home", { shouldRender: true });
           }}
           style={styles.returnBtn}
-        />
+        /> */}
         <Text style={styles.title}>Add money use</Text>
       </View>
       <View style={styles.container}>
         <View
           style={{
             width: "100%",
-            backgroundColor: "#94C3F6",
             flexDirection: "row",
             alignItems: "center",
             borderRadius: 15,
             padding: 10,
-            backgroundColor: "#94C3F6",
+            backgroundColor: "#bababa",
+            marginTop: 35,
           }}
         >
           <TextInput
@@ -168,11 +170,11 @@ const AddMoneyPage = ({ navigation }) => {
             style={{
               flex: 1,
               width: "50%",
-              backgroundColor: isExpense ? "#F89999" : null,
+              backgroundColor: isExpense ? "#ffe3e0" : null,
               borderRadius: 15,
               paddingVertical: 8,
-              borderWidth: 2, // Adjust the border width as desired
-              borderColor: "#FE4848",
+              borderWidth: 1, // Adjust the border width as desired
+              borderColor: "#4f4f4f",
             }}
             onPress={() => {
               setIsExpense(true);
@@ -187,10 +189,10 @@ const AddMoneyPage = ({ navigation }) => {
             style={{
               flex: 1,
               width: "50%",
-              backgroundColor: !isExpense ? "#A9F4A7" : null,
+              backgroundColor: !isExpense ? "#d9ffdb" : null,
               borderRadius: 15,
               paddingVertical: 8,
-              borderWidth: 2, // Adjust the border width as desired
+              borderWidth: 1, // Adjust the border width as desired
               borderColor: "#009900",
             }}
             onPress={() => {
@@ -208,16 +210,19 @@ const AddMoneyPage = ({ navigation }) => {
           style={{
             flexDirection: "row",
             alignItems: "center",
-            marginTop: 20,
-            gap: 30,
+            marginTop: 60,
+            gap: 100,
           }}
         >
           <View>
-            <Text>{convertDateInAddMoney(date)}</Text>
+            <Text style={{ fontSize: 17 }}>{convertDateInAddMoney(date)}</Text>
           </View>
 
           <View>
-            <Button title="Choose date" onPress={showDatePicker} />
+            <View>
+              <Button title="Choose date" onPress={showDatePicker} />
+            </View>
+
             <DateTimePickerModal
               value={date}
               isVisible={isDatePickerVisible}
@@ -265,17 +270,22 @@ const AddMoneyPage = ({ navigation }) => {
 
         <TouchableOpacity
           style={{
-            backgroundColor: "red",
+            backgroundColor: "#bababa",
             paddingHorizontal: "10%",
             paddingVertical: 10,
             borderRadius: 15,
+            marginTop: 50,
           }}
           onPress={handleAddMoneyUse}
         >
           <Text>Add</Text>
         </TouchableOpacity>
       </View>
-
+      <BottomBack
+        menuOnPress={() => {
+          navigation.navigate("Home");
+        }}
+      />
       {/* <BottomMenu
         menuOnPress={() => {
           navigation.navigate("Menu");
@@ -388,7 +398,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   contextInput: {
-    marginLeft: 10,
-    marginBottom: 3,
+    // marginLeft: 10,
+    marginBottom: 0,
   },
 });

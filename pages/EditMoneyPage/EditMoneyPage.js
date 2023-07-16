@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { Input } from "@rneui/themed";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { BottomMenu, MenuBtn } from "../../components";
+import { BottomBack, MenuBtn } from "../../components";
 import DropDownPicker from "react-native-dropdown-picker";
 import left_icon from "../../asset/icons/left.png";
 import {
@@ -132,25 +132,26 @@ const EditMoneyPage = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
       <View style={styles.containerReturnBtn}>
-        <MenuBtn
+        {/* <MenuBtn
           iconUrl={left_icon}
           dimension={"70%"}
           handlePress={() => {
             navigation.navigate("Home", { shouldRender: true });
           }}
           style={styles.returnBtn}
-        />
+        /> */}
         <Text style={styles.title}>Edit money use</Text>
       </View>
       <View style={styles.container}>
         <View
           style={{
             width: "100%",
-            backgroundColor: "#94C3F6",
+            backgroundColor: "#bababa",
             flexDirection: "row",
             alignItems: "center",
             borderRadius: 15,
             padding: 10,
+            marginTop: 35,
           }}
         >
           <TextInput
@@ -175,11 +176,11 @@ const EditMoneyPage = ({ navigation, route }) => {
             style={{
               flex: 1,
               width: "50%",
-              backgroundColor: isExpense ? "#F89999" : null,
+              backgroundColor: isExpense ? "#ffe3e0" : null,
               borderRadius: 15,
               paddingVertical: 8,
-              borderWidth: 2, // Adjust the border width as desired
-              borderColor: "#FE4848",
+              borderWidth: 1, // Adjust the border width as desired
+              borderColor: "#4f4f4f",
             }}
             onPress={() => {
               setIsExpense(true);
@@ -194,11 +195,11 @@ const EditMoneyPage = ({ navigation, route }) => {
             style={{
               flex: 1,
               width: "50%",
-              backgroundColor: !isExpense ? "#A9F4A7" : null,
+              backgroundColor: !isExpense ? "#d9ffdb" : null,
               borderRadius: 15,
               paddingVertical: 8,
-              borderWidth: 2, // Adjust the border width as desired
-              borderColor: "#009900",
+              borderWidth: 1, // Adjust the border width as desired
+              borderColor: "#4f4f4f",
             }}
             onPress={() => {
               setIsExpense(false);
@@ -215,12 +216,12 @@ const EditMoneyPage = ({ navigation, route }) => {
           style={{
             flexDirection: "row",
             alignItems: "center",
-            marginTop: 20,
-            gap: 30,
+            marginTop: 60,
+            gap: 100,
           }}
         >
           <View>
-            <Text>{convertDateInAddMoney(date)}</Text>
+            <Text style={{ fontSize: 17 }}>{convertDateInAddMoney(date)}</Text>
           </View>
 
           <View>
@@ -269,10 +270,10 @@ const EditMoneyPage = ({ navigation, route }) => {
             onSelectItem={handleSelectCategory}
           />
         </View>
-        <View style={{ flexDirection: "row", gap: 10 }}>
+        <View style={{ flexDirection: "row", gap: 20, marginTop: 50 }}>
           <TouchableOpacity
             style={{
-              backgroundColor: "#e33243",
+              backgroundColor: "#fc9595",
               paddingHorizontal: "10%",
               paddingVertical: 10,
               borderRadius: 15,
@@ -290,11 +291,15 @@ const EditMoneyPage = ({ navigation, route }) => {
             }}
             onPress={handleChangeMoneyUse}
           >
-            <Text>Change</Text>
+            <Text>Save</Text>
           </TouchableOpacity>
         </View>
       </View>
-
+      <BottomBack
+        menuOnPress={() => {
+          navigation.navigate("Home");
+        }}
+      />
       {/* <BottomMenu
         menuOnPress={() => {
           navigation.navigate("Menu");
@@ -408,6 +413,6 @@ const styles = StyleSheet.create({
   },
   contextInput: {
     marginLeft: 10,
-    marginBottom: 3,
+    // marginBottom: 3,
   },
 });
