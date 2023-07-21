@@ -45,19 +45,19 @@ const AccountPage = ({ navigation, route }) => {
 
       <AccountDetail style={{ paddingBottom: 60 }} navigation={navigation} />
 
-      <BottomBack
+      {/* <BottomBack
         menuOnPress={() => {
           navigation.navigate("Home");
         }}
-      />
-      {/* <BottomMenu
+      /> */}
+      <BottomMenu
         menuOnPress={() => {
           navigation.navigate("Menu");
         }}
         addItemOnPress={() => {
           navigation.navigate("AddPaymentMethod");
         }}
-      /> */}
+      />
     </SafeAreaView>
   );
 };
