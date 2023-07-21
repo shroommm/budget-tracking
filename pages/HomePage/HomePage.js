@@ -118,7 +118,7 @@ const HomePage = ({ navigation, route }) => {
     return (
       <SafeAreaView style={{ flex: 1, paddingTop: 40, paddingBottom: 60 }}>
         <Text style={{ fontSize: 40, textAlign: "center" }}>
-          See you again!
+          Please add money source to use this page!
         </Text>
         <BottomMenu
           menuOnPress={() => {
@@ -164,6 +164,7 @@ const HomePage = ({ navigation, route }) => {
               paddingTop: 10,
               color: "black",
               zIndex: -1,
+              fontSize: 14,
             }}
           >
             {getAmountOfAccount(account.id).toLocaleString() + " VND"}
@@ -350,5 +351,8 @@ const styles = StyleSheet.create({
 
     fontSize: 17,
     zIndex: 999,
+
+    width: 150,
+    alignSelf: "center",
   },
 });

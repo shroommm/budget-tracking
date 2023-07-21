@@ -123,10 +123,12 @@ const EditMoneyPage = ({ navigation, route }) => {
     };
 
     changeMoneyUse(moneyUse);
+    navigation.navigate("Home");
   };
 
   const handleDeleteMoneyUse = () => {
     deleteMoneyUse(editMoneyUse.id);
+    navigation.navigate("Home");
   };
 
   return (
