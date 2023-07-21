@@ -9,7 +9,7 @@ import {
   TouchableHighlight,
 } from "react-native";
 
-import { MenuBtn, InputTransfer } from "../../components";
+import { MenuBtn, InputTransfer, BottomBack } from "../../components";
 
 import left_icon from "../../asset/icons/left.png";
 
@@ -17,14 +17,14 @@ const AddTransferPage = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
       <View style={styles.container}>
-        <MenuBtn
+        {/* <MenuBtn
           iconUrl={left_icon}
           dimension={"70%"}
           handlePress={() => {
             navigation.navigate("Account");
           }}
           style={styles.returnBtn}
-        />
+        /> */}
         <Text style={styles.title}>Create new transfer</Text>
       </View>
 
@@ -33,7 +33,12 @@ const AddTransferPage = ({ navigation }) => {
         addBtnOnPress={() => {
           navigation.navigate("Account", { shouldRender: true });
         }}
-        btnName={'Transfer'}
+        btnName={"Transfer"}
+      />
+      <BottomBack
+        menuOnPress={() => {
+          navigation.navigate("Account");
+        }}
       />
     </SafeAreaView>
   );

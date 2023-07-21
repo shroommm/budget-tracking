@@ -9,26 +9,29 @@ import {
   TouchableHighlight,
 } from "react-native";
 
-import { MenuBtn, TransferHistory } from "../../components";
+import { MenuBtn, TransferHistory, BottomBack } from "../../components";
 
-import left_icon from "../../asset/icons/left.png"
+import left_icon from "../../asset/icons/left.png";
 
 const TransferHistoryPage = ({ navigation }) => {
-
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
-
       <View style={styles.container}>
-        <MenuBtn
+        {/* <MenuBtn
           iconUrl={left_icon}
           dimension={'70%'}
           handlePress={() => { navigation.navigate("Account") }}
           style={styles.returnBtn}
-        />
+        /> */}
         <Text style={styles.title}>Transfer history</Text>
       </View>
 
-      <TransferHistory/>
+      <TransferHistory />
+      <BottomBack
+        menuOnPress={() => {
+          navigation.navigate("Account");
+        }}
+      />
     </SafeAreaView>
   );
 };
@@ -40,17 +43,16 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     paddingTop: 30,
     paddingBottom: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
   },
-  title: {
-  },
+  title: {},
   returnBtn: {
-    position: 'absolute',
+    position: "absolute",
     height: 40,
     width: 40,
     top: 22,
-    left: '4%',
+    left: "4%",
   },
   input: {
     marginTop: 20,

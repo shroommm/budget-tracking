@@ -9,7 +9,7 @@ import {
   TouchableHighlight,
 } from "react-native";
 
-import { MenuBtn, InputAccount } from "../../components";
+import { MenuBtn, InputAccount, BottomBack } from "../../components";
 
 import left_icon from "../../asset/icons/left.png";
 
@@ -17,15 +17,15 @@ const AddPaymentMethodPage = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 25 }}>
       <View style={styles.container}>
-        <MenuBtn
+        {/* <MenuBtn
           iconUrl={left_icon}
           dimension={"70%"}
           handlePress={() => {
             navigation.navigate("Account");
           }}
           style={styles.returnBtn}
-        />
-        <Text style={styles.title}>Add money source</Text>
+        /> */}
+        <Text style={styles.title}>Add payment method</Text>
       </View>
 
       <InputAccount
@@ -33,7 +33,12 @@ const AddPaymentMethodPage = ({ navigation }) => {
         addBtnOnPress={() => {
           navigation.navigate("Account", { shouldRender: true });
         }}
-        btnName={'Add'}
+        btnName={"Add"}
+      />
+      <BottomBack
+        menuOnPress={() => {
+          navigation.navigate("Account");
+        }}
       />
     </SafeAreaView>
   );
